@@ -6,11 +6,11 @@ import {MatSidenavModule} from '@angular/material/sidenav';
  * @title Autosize sidenav
  */
 @Component({
-  selector: 'sidenav-autosize-example',
-  templateUrl: 'sidenav-autosize-example.html',
-  styleUrl: 'sidenav-autosize-example.css',
+selector: 'app-sidenav',
+  templateUrl: 'sidenav.html',
+  styleUrl: 'sidenav.scss',
   imports: [MatSidenavModule, MatButtonModule],
 })
-export class SidenavAutosizeExample {
+export class Sidenav {
   showFiller = false;
 }
