@@ -1,16 +1,16 @@
-.example-container {
-  width: 500px;
-  height: 300px;
-  border: 1px solid rgba(0, 0, 0, 0.5);
+.layout-container {
+  height: 100vh;
 }
 
-.example-sidenav-content {
-  display: flex;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
+.sidenav {
+  width: 260px;
 }
 
-.example-sidenav {
-  padding: 20px;
+.sidenav-handle {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 0 12px 12px 0;
+  z-index: 1001;
 }
