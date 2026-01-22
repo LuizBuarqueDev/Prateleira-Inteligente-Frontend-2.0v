@@ -1,18 +1,32 @@
-<mat-drawer-container class="example-container" autosize>
-  <mat-drawer #drawer class="example-sidenav" mode="side">
-    <p>Auto-resizing sidenav</p>
-    @if (showFiller) {
-      <p>Lorem, ipsum dolor sit amet consectetur.</p>
-    }
-    <button (click)="showFiller = !showFiller" matButton="elevated">
-      Toggle extra text
-    </button>
+<mat-drawer-container class="layout-container">
+
+  <mat-drawer
+    #drawer
+    class="sidenav"
+    mode="over"
+    (backdropClick)="drawer.close()"
+  >
+    <nav class="menu">
+      <a mat-button routerLink="/livros" (click)="drawer.close()">📚 Livros</a>
+      <a mat-button routerLink="/autores" (click)="drawer.close()">✍️ Autores</a>
+      <a mat-button routerLink="/config" (click)="drawer.close()">⚙️ Configurações</a>
+    </nav>
   </mat-drawer>
 
-  <div class="example-sidenav-content">
-    <button type="button" matButton (click)="drawer.toggle()">
-      Toggle sidenav
-    </button>
-  </div>
+  <mat-drawer-content>
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
 
 </mat-drawer-container>
+
+<!-- HANDLE DA SIDEBAR -->
+@if (!drawer.opened) {
+  <button
+    mat-mini-fab
+    class="sidenav-handle"
+    (click)="drawer.open()"
+  >
+    <mat-icon>chevron_right</mat-icon>
+  </button>
+}
+
