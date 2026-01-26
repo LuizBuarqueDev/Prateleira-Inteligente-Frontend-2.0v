@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
+import { SidebarHeader } from './componets/sidebar-header/header';
+import { MatIcon } from "@angular/material/icon";
 @Component({
   selector: 'app-sidenav',
   standalone: true,
@@ -11,8 +12,9 @@ import { RouterModule } from '@angular/router';
   imports: [
     MatSidenavModule,
     MatButtonModule,
-    MatIconModule,
-    RouterModule
-  ]
+    RouterModule,
+    SidebarHeader,
+    MatIcon
+]
 })
 export class Sidenav {}
