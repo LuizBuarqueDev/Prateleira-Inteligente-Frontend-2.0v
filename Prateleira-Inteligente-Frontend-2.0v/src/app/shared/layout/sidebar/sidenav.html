@@ -6,11 +6,25 @@
     mode="over"
     (backdropClick)="drawer.close()"
   >
+   <div>
+    <div class="sidenav-header">
+      <app-sidebar-header></app-sidebar-header>
+    </div>
+    
     <nav class="menu">
-      <a mat-button routerLink="/livros" (click)="drawer.close()">📚 Livros</a>
-      <a mat-button routerLink="/autores" (click)="drawer.close()">✍️ Autores</a>
-      <a mat-button routerLink="/config" (click)="drawer.close()">⚙️ Configurações</a>
+      <a class="btn" mat-button clasrouterLink="/dashboard" routerLinkActive="active" (click)="drawer.close()">
+        <mat-icon>dashboard</mat-icon>Home
+      </a>
+
+      <a class="btn" mat-button routerLink="/books" routerLinkActive="active" (click)="drawer.close()">
+        <mat-icon>shelves</mat-icon>Todos os Livros
+      </a>
+
+      <a class="btn" mat-button routerLink="/library" routerLinkActive="active" (click)="drawer.close()">
+        <mat-icon>collections_bookmark</mat-icon>Sua Biblioteca
+      </a>
     </nav>
+   </div> 
   </mat-drawer>
 
   <mat-drawer-content>
@@ -19,7 +33,6 @@
 
 </mat-drawer-container>
 
-<!-- HANDLE DA SIDEBAR -->
 @if (!drawer.opened) {
   <button
     mat-mini-fab
