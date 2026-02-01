@@ -13,22 +13,21 @@
     line-height: 1.1;
   }
 
-  mat-icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+mat-icon {
+  box-sizing: border-box;
 
-    width: 40px;
-    height: 40px;
-    padding: 8px;
-    margin: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    background: var(--gradient-1);
-    color: white;
-    border-radius: 10px;
-    font-size: 24px;
+  width: 40px;
+  height: 40px;
+  padding: 8px;
 
-      border-radius: 1px solid var(--light-border);
+  background: var(--gradient-1);
+  color: white;
+  border-radius: 10px;
+  font-size: 24px;
+}
 
-  }
 }
