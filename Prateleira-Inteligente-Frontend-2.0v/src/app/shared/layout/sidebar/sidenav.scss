@@ -4,30 +4,59 @@
 
 .sidenav {
   width: 260px;
-  border-radius: 0;
+  padding: 12px;
 }
 
+.sidenav-header {
+  padding: 10px 6px 14px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 4px;
+
+  .btn {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-start;
+
+    width: 100%;
+    padding: 12px 14px;
+
+    font-size: 16px;
+    font-weight: 500;
+
+    border-radius: 12px;
+
+    color: var(--dark)
+
+    mat-icon {
+      color: currentColor;
+    }
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.06);
+    }
+
+    &.active {
+      background: var(--gradient-1);
+      color: var(--light);
+    }
+  }
+}
+
+/* botão flutuante */
 .sidenav-handle {
   position: fixed;
-  left: 0;
+  left: 10px;
   top: 50%;
   transform: translateY(-50%);
   z-index: 1001;
-}
 
-.btn {
-  padding: 10px;
-  width: 100%;
-  justify-content: flex-start;
-  padding: 12px 16px;
-  font-size: 16px;
-  text-transform: none;
-  text-decoration: none;
-}
-.menu .btn {
-  color: rgba(0, 0, 0, 0.75);
-
-  mat-icon {
-    color: currentColor !important;
-  }
+  background: var(--gradient-1);
+  color: var(--light );
 }
