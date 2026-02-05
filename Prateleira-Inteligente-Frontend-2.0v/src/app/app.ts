@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Sidenav } from './shared/layout/sidebar/sidenav';
+import { Sidenav } from './shared/layout/sidebar/sidenav.component';
 
 @Component({
   selector: 'app-root',
