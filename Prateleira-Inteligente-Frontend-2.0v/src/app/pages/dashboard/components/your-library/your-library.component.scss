@@ -1,0 +1,33 @@
+.your-library-container {
+  max-width: 30%;
+  color: var(--light);
+  background: var(--gradient-2);
+  border-radius: 12px;
+  padding: 12px;
+
+  data {
+    font-size: 30px;
+    font-weight: 700;
+  }
+
+  .btn {
+    display: block;
+    width: 90%;
+    margin: 12px auto;
+    padding: 8px 16px;
+
+    color: var(--light);
+    text-decoration: none;
+
+    background: color-mix(in srgb, var(--light) 18%, transparent);
+
+    border-radius: 8px;
+    text-align: center;
+
+    transition: background 0.2s ease;
+
+    &:hover {
+      background: color-mix(in srgb, var(--light) 28%, transparent);
+    }
+  }
+}
