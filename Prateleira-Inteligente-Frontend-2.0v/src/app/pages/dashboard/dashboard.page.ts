@@ -1,11 +1,11 @@
-import { Component } from "@angular/core";
-import { GenericStatcardComponent } from "./components/statcard/generic/generic-statcard.component";
+import { Component } from '@angular/core';
+import { StatsCardsContainerComponent } from './components/stats-cards-container/stats-cards-container.component';
 
 @Component({
-  selector: "app-dashboard",
+  selector: 'app-dashboard',
   standalone: true,
-    templateUrl: "dashboard.page.html",
-    styleUrls: ["dashboard.page.scss"],
-    imports: [GenericStatcardComponent],
+  templateUrl: 'dashboard.page.html',
+  styleUrls: ['dashboard.page.scss'],
+  imports: [StatsCardsContainerComponent],
 })
 export class DashboardPage {}
