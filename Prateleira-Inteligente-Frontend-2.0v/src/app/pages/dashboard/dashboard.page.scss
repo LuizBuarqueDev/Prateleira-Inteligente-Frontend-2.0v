@@ -12,6 +12,14 @@
 
   .spacer {
     display: flex;
-    justify-content: center;
+    gap: 20px;
+  }
+
+  .your-library-container {
+    flex: 0 0 40%;
+  }
+
+  .rated-books-container {
+    flex: 1;
   }
 }
