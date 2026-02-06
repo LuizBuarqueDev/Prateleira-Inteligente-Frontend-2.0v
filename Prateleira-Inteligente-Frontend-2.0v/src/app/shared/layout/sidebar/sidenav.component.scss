@@ -33,9 +33,7 @@
 
     border-radius: 12px;
 
-    color: var(--dark)
-
-    mat-icon {
+    color: var(--dark) mat-icon {
       color: currentColor;
     }
 
@@ -54,10 +52,10 @@
 .sidenav-handle {
   position: fixed;
   left: 10px;
-  top: 50%;
+  top: 80%;
   transform: translateY(-50%);
   z-index: 1001;
 
   background: var(--gradient-1);
-  color: var(--light );
+  color: var(--light);
 }
