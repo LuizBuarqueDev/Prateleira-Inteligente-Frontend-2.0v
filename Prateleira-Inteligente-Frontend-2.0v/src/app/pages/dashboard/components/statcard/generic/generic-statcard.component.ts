@@ -1,5 +1,4 @@
 import { Component, Input } from "@angular/core";
-import { NgClass } from "@angular/common";
 import { MatIconModule } from "@angular/material/icon";
 
 @Component({
@@ -7,7 +6,7 @@ import { MatIconModule } from "@angular/material/icon";
   standalone: true,
   templateUrl: "generic-statcard.component.html",
   styleUrls: ["generic-statcard.component.scss"],
-  imports: [MatIconModule, NgClass],
+  imports: [MatIconModule],
 })
 export class GenericStatcardComponent {
   @Input() icon!: string;
@@ -15,5 +14,5 @@ export class GenericStatcardComponent {
   @Input() label!: string;
 
   // fundo do ícone
-  @Input() iconBgClass?: string;
+@Input() iconBgColor?: string;
 }
