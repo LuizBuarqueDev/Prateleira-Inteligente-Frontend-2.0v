@@ -1,8 +1,17 @@
 .main-content {
   display: flex;
   flex-direction: column;
+  background-color: var(--light);
   padding: 30px;
-  p {
-    color: var(--dark-gray);
+
+  header {
+    p {
+      color: var(--dark-gray);
+    }
+  }
+
+  .spacer {
+    display: flex;
+    justify-content: center;
   }
 }
