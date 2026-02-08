@@ -1,7 +1,7 @@
 import { AuthorSimplified } from './simplified/author-simplified.model';
 import { CategoriesSimplified } from './simplified/categories-simplified.model';
 
-export interface BookDTO {
+export interface Book {
   id: string;
   title: string;
   cover: string;
