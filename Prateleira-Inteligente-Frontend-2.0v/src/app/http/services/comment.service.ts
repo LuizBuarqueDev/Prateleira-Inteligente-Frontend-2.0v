@@ -5,6 +5,6 @@ import { Comment } from '../../shared/models/comment.model';
 @Injectable({ providedIn: 'root' })
 export class CommentService extends GenericService<Comment> {
   constructor() {
-    super('/api/comments');
+    super('/comments');
   }
 }
