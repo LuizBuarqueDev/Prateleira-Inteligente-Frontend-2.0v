@@ -5,6 +5,6 @@ import { GenericService } from './generic.service';
 @Injectable({ providedIn: 'root' })
 export class AuthorService extends GenericService<Author> {
   constructor() {
-    super('/api/authors');
+    super('/authors');
   }
 }
