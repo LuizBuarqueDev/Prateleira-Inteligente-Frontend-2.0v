@@ -2,6 +2,21 @@
   display: flex;
   justify-content: space-between;
 
+  .img-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .img-16-9 {
+      width: 80px;
+      /* tamanho da capa */
+      height: 120px;
+      object-fit: cover;
+      border-radius: 6px;
+      flex-shrink: 0;
+    }
+  }
+
   p {
     color: var(--dark-gray);
   }
@@ -21,6 +36,7 @@
       align-items: center;
       gap: 0.25rem;
       font-weight: bold;
+
       mat-icon {
         color: #fbc02d;
       }
