@@ -1,10 +1,14 @@
 @for (book of books(); track book.id) {
   <div class="rated-books-cards">
     <div class="book-info">
-      <img [src]="book.cover || 'assets/images/no-cover.jpeg'" />
+      <div class="img-container">
+
+      <img class="img-16-9" [src]="book.cover || 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg'" />
       <div>
         <h3>{{ book.title }}</h3>
         <p>{{ book.publisher }}</p>
+      </div>
+
       </div>
 
       <div class="rating-section">
