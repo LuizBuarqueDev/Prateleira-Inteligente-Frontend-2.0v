@@ -1,11 +1,16 @@
-@for (book of books$ | async; track book.id) {
+@for (book of books(); track book.id) {
   <div class="rated-books-cards">
-    <img [src]="book.cover" />
-
     <div class="book-info">
-      <h3>{{ book.title }}</h3>
-      <p>Avaliações: {{ book.assessmentQuantity }}</p>
-      <data [value]="book.score">{{ book.score }}</data>
+      <img [src]="book.cover || 'assets/images/no-cover.jpeg'" />
+      <div>
+        <h3>{{ book.title }}</h3>
+        <p>{{ book.publisher }}</p>
+      </div>
+
+      <div class="rating-section">
+        <data [value]="book.score">{{ book.score }}<mat-icon>star_shine</mat-icon></data>
+        <p>({{ book.assessmentQuantity }})</p>
+      </div>
     </div>
   </div>
 }
