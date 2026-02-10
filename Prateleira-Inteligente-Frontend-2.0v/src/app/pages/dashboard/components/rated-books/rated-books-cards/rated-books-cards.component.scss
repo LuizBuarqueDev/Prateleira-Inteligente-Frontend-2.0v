@@ -1,0 +1,29 @@
+.book-info {
+  display: flex;
+  justify-content: space-between;
+
+  p {
+    color: var(--dark-gray);
+  }
+
+  h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+
+  .rating-section {
+    display: flex;
+    align-items: center;
+
+    data {
+      font-size: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-weight: bold;
+      mat-icon {
+        color: #fbc02d;
+      }
+    }
+  }
+}
