@@ -8,13 +8,13 @@ export const routes: Routes = [
   },
   {
     path: 'books',
-    loadComponent: () => import('./pages/all-books/all-books').then((m) => m.AllBooksPage),
+    loadComponent: () => import('./pages/all-books/all-books.page').then((m) => m.AllBooksPage),
     pathMatch: 'full',
   },
   {
     path: 'library',
     loadComponent: () =>
-      import('./pages/my-library/my-library.component').then((m) => m.MyLibraryComponent),
+      import('./pages/my-library/my-library.page').then((m) => m.MyLibraryComponent),
     pathMatch: 'full',
   },
 ];
