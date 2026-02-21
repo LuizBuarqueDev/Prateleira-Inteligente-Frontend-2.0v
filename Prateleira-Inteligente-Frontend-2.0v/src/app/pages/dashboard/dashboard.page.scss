@@ -1,25 +1,18 @@
-.main-content {
+header {
+  p {
+    color: var(--dark-gray);
+  }
+}
+
+.spacer {
   display: flex;
-  flex-direction: column;
-  background-color: var(--light);
-  padding: 30px;
+  gap: 20px;
+}
 
-  header {
-    p {
-      color: var(--dark-gray);
-    }
-  }
+.your-library-container {
+  flex: 0 0 40%;
+}
 
-  .spacer {
-    display: flex;
-    gap: 20px;
-  }
-
-  .your-library-container {
-    flex: 0 0 40%;
-  }
-
-  .rated-books-container {
-    flex: 1;
-  }
+.rated-books-container {
+  flex: 1;
 }
