@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-my-library',
-  templateUrl: './my-library.component.html',
-  styleUrl: './my-library.component.scss',
+  templateUrl: './my-library.page.html',
+  styleUrl: './my-library.page.scss',
   imports: [],
 })
 export class MyLibraryComponent {}
