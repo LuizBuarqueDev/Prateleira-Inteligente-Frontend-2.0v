@@ -1,20 +1,34 @@
-@for (book of books(); track book.id) {
-  <div class="rated-books-cards">
-    <div class="book-info">
-      <div class="img-container">
+@if (books.isLoading()) {
+  <p>Carregando...</p>
+} @else if (books.error()) {
+  <p>Erro ao carregar livros</p>
+} @else {
+  @for (book of books.value(); track book.id) {
+    <div class="rated-books-cards">
+      <div class="book-info">
+        <div class="img-container">
+          <img
+            class="img-16-9"
+            [src]="
+              book.cover ||
+              'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg'
+            "
+          />
 
-      <img class="img-16-9" [src]="book.cover || 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg'" />
-      <div>
-        <h3>{{ book.title }}</h3>
-        <p>{{ book.publisher }}</p>
-      </div>
+          <div>
+            <h3>{{ book.title }}</h3>
+            <p>{{ book.publisher }}</p>
+          </div>
+        </div>
 
-      </div>
-
-      <div class="rating-section">
-        <data [value]="book.score">{{ book.score }}<mat-icon>star_shine</mat-icon></data>
-        <p>({{ book.assessmentQuantity }})</p>
+        <div class="rating-section">
+          <data [value]="book.score">
+            {{ book.score }}
+            <mat-icon>star_shine</mat-icon>
+          </data>
+          <p>({{ book.assessmentQuantity }})</p>
+        </div>
       </div>
     </div>
-  </div>
+  }
 }

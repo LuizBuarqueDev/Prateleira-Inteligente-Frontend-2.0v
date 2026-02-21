@@ -14,7 +14,5 @@ import { toSignal } from '@angular/core/rxjs-interop';
 export class RatedBooksCardsComponent {
   private bookService = inject(BookService);
 
-  books = toSignal(this.bookService.getSimplifiedBooks(), {
-    initialValue: [],
-  });
+  books = inject(BookService).simplifiedBooks;
 }
