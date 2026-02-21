@@ -1,45 +1,58 @@
 <mat-drawer-container class="layout-container">
-
   <mat-drawer
     #drawer
     class="sidenav"
     mode="over"
+    autoFocus="false"
     (backdropClick)="drawer.close()"
   >
-   <div>
-    <div class="sidenav-header">
-      <app-sidebar-header></app-sidebar-header>
+    <div>
+      <div class="sidenav-header">
+        <app-sidebar-header></app-sidebar-header>
+      </div>
+
+      <nav class="menu">
+        <a
+          class="btn"
+          mat-button
+          routerLink="/"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          (click)="drawer.close()"
+        >
+          <mat-icon>dashboard</mat-icon>Home
+        </a>
+
+        <a
+          class="btn"
+          mat-button
+          routerLink="/books"
+          routerLinkActive="active"
+          (click)="drawer.close()"
+        >
+          <mat-icon>shelves</mat-icon>Todos os Livros
+        </a>
+
+        <a
+          class="btn"
+          mat-button
+          routerLink="/library"
+          routerLinkActive="active"
+          (click)="drawer.close()"
+        >
+          <mat-icon>collections_bookmark</mat-icon>Sua Biblioteca
+        </a>
+      </nav>
     </div>
-    
-    <nav class="menu">
-      <a class="btn" mat-button clasrouterLink="/dashboard" routerLinkActive="active" (click)="drawer.close()">
-        <mat-icon>dashboard</mat-icon>Home
-      </a>
-
-      <a class="btn" mat-button routerLink="/books" routerLinkActive="active" (click)="drawer.close()">
-        <mat-icon>shelves</mat-icon>Todos os Livros
-      </a>
-
-      <a class="btn" mat-button routerLink="/library" routerLinkActive="active" (click)="drawer.close()">
-        <mat-icon>collections_bookmark</mat-icon>Sua Biblioteca
-      </a>
-    </nav>
-   </div> 
   </mat-drawer>
 
   <mat-drawer-content>
     <router-outlet></router-outlet>
   </mat-drawer-content>
-
 </mat-drawer-container>
 
 @if (!drawer.opened) {
-  <button
-    mat-mini-fab
-    class="sidenav-handle"
-    (click)="drawer.open()"
-  >
+  <button mat-mini-fab class="sidenav-handle" (click)="drawer.open()">
     <mat-icon>chevron_right</mat-icon>
   </button>
 }
-

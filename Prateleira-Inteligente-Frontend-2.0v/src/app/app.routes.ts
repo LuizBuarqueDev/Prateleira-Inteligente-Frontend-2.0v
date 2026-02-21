@@ -1,18 +1,20 @@
 import { Routes } from '@angular/router';
-import path from 'node:path';
 
 export const routes: Routes = [
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   {
-    path: '',
-    loadComponent: () =>
-      import('./pages/dashboard/dashboard.page')
-        .then(m => m.DashboardPage),
+    path: 'dashboard',
+    loadComponent: () => import('./pages/dashboard/dashboard.page').then((m) => m.DashboardPage),
+  },
+  {
+    path: 'books',
+    loadComponent: () => import('./pages/all-books/all-books').then((m) => m.AllBooksPage),
     pathMatch: 'full',
-  },{
-  path: 'books',
+  },
+  {
+    path: 'library',
     loadComponent: () =>
-      import('./pages/all-books/all-books')
-        .then(m => m.AllBooksPage),
-        pathMatch: 'full',
+      import('./pages/my-library/my-library.component').then((m) => m.MyLibraryComponent),
+    pathMatch: 'full',
   },
 ];
