@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { inject } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Signal, inject, resource } from '@angular/core';
+import { firstValueFrom } from 'rxjs';
 import { API_CONFIG } from '../api.config';
 
 export abstract class GenericService<T> {
@@ -13,33 +13,42 @@ export abstract class GenericService<T> {
     return `${this.baseUrl}${this.apiUrl}`;
   }
 
-  create(dto: T): Observable<T> {
+  create(dto: T) {
     return this.http.post<T>(this.url, dto);
   }
 
-  update(id: string, dto: T): Observable<T> {
+  update(id: string, dto: T) {
     return this.http.put<T>(`${this.url}/${id}`, dto);
   }
 
-  getById(id: string): Observable<T> {
-    return this.http.get<T>(`${this.url}/${id}`);
-  }
-
-  getAll(): Observable<T[]> {
-    return this.http.get<T[]>(this.url);
-  }
-
-  getByIds(ids: string[]): Observable<T[]> {
-    return this.http.get<T[]>(`${this.url}/ids`, {
-      params: { ids },
-    });
-  }
-
-  count(): Observable<number> {
-    return this.http.get<number>(`${this.url}/count`);
-  }
-
-  delete(id: string): Observable<void> {
+  delete(id: string) {
     return this.http.delete<void>(`${this.url}/${id}`);
+  }
+
+  // HELPER
+  protected r<R>(load: () => Promise<R>, defaultValue: R) {
+    return resource<R, void>({ loader: load, defaultValue });
+  }
+
+  // (Resources)
+  readonly all = this.r(() => firstValueFrom(this.http.get<T[]>(this.url)), []);
+
+  readonly total = this.r(() => firstValueFrom(this.http.get<number>(`${this.url}/count`)), 0);
+
+  byId(id: Signal<string>) {
+    return this.r(
+      () => firstValueFrom(this.http.get<T>(`${this.url}/${id()}`)),
+      null as unknown as T
+    );
+  }
+
+  byIds(ids: Signal<string[]>) {
+    return this.r(
+      () =>
+        firstValueFrom(
+          this.http.get<T[]>(`${this.url}/ids`, { params: { ids: ids() } })
+        ),
+      []
+    );
   }
 }
