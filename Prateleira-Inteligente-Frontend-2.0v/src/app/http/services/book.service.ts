@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { GenericService } from './generic.service';
+import { GenericService } from '@services/generic.service';
 import { Book } from '@models/book.model';
 import { BookSimplified } from '@models/simplified/book-simplified.model';
 import { resourceFromObservable } from './util/signal-resource.util';
