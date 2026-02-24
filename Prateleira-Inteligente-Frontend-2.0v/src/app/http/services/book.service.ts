@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { GenericService } from './generic.service';
-import { Book } from '../../shared/models/book.model';
-import { BookSimplified } from '../../shared/models/simplified/book-simplified.model';
+import { Book } from '@models/book.model';
+import { BookSimplified } from '@models/simplified/book-simplified.model';
 import { resourceFromObservable } from './util/signal-resource.util';
 
 @Injectable({ providedIn: 'root' })

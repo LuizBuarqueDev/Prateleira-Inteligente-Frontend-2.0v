@@ -1,8 +1,7 @@
 import { Component, inject } from '@angular/core';
-import { BookService } from '../../../../../http/services/book.service';
+import { BookService } from '@services/book.service';
 import { CommonModule } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
-import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-rated-books-cards',
@@ -11,8 +10,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
   standalone: true,
   imports: [CommonModule, MatIcon],
 })
-export class RatedBooksCardsComponent {
-  private bookService = inject(BookService);
 
+export class RatedBooksCardsComponent {
   books = inject(BookService).simplifiedBooks;
 }
