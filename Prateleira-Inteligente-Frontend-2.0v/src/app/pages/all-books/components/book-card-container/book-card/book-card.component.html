@@ -5,11 +5,18 @@
       [src]="
         book()?.cover ||
         'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg'
-        "
-        />
+      "
+    />
   </div>
   <div class="book-info">
     <h3>{{ book()?.title }}</h3>
-    <p>{{ book()?.publisher}}</p>
+    <p>{{ book()?.publisher }}</p>
+    <div class="rating-section">
+      <mat-icon>star_shine</mat-icon>
+      <data [value]="book()?.score">
+        {{ book()?.score }}
+      </data>
+      <p>({{ book()?.assessmentQuantity }})</p>
+    </div>
   </div>
 </div>

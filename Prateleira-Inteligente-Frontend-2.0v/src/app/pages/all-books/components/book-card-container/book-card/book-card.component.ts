@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, input } from '@angular/core';
+import { MatIcon } from '@angular/material/icon';
 import { BookSimplified } from '@app/shared/models/simplified/book-simplified.model';
 
 @Component({
@@ -7,7 +8,7 @@ import { BookSimplified } from '@app/shared/models/simplified/book-simplified.mo
   standalone: true,
   templateUrl: './book-card.component.html',
   styleUrls: ['./book-card.component.scss'],
-  imports: [CommonModule],
+  imports: [CommonModule, MatIcon],
 })
 export class BookCardComponent {
   book = input<BookSimplified>();
