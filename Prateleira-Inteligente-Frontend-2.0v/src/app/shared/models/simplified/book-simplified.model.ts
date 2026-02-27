@@ -5,4 +5,5 @@ export interface BookSimplified {
   publisher: string;
   score: number | null;
   assessmentQuantity: number | null;
+  categoriesNames: string[];
 }

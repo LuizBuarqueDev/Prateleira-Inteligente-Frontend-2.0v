@@ -1,0 +1,21 @@
+.category-card {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0.25rem 0.75rem;
+  border-radius: 8px;
+
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+
+  transition: all 0.2s ease;
+
+  cursor: default;
+  user-select: none;
+
+  &:hover {
+    filter: brightness(0.95);
+  }
+}

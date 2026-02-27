@@ -18,5 +18,11 @@
       </data>
       <p>({{ book()?.assessmentQuantity }})</p>
     </div>
+
+    <div class="categories">
+      @for (category of book()?.categoriesNames; track category) {
+        <app-category-card [category]="category" />
+      }
+    </div>
   </div>
 </div>
