@@ -13,8 +13,4 @@ import { CategoryCardComponent } from './category-card/category-card.component';
 })
 export class BookCardComponent {
   book = input<BookSimplified>();
-
-  ngOnInit() {
-    console.log(this.book());
-  }
 }
