@@ -1,12 +1,15 @@
 import { Component, model } from '@angular/core';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
+import { MatIcon } from '@angular/material/icon';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   standalone: true,
   selector: 'app-search-bar',
-  imports: [ReactiveFormsModule],
-  template: ` <input type="text" [formControl]="searchControl" placeholder="Buscar livro..." /> `,
+  imports: [ReactiveFormsModule, MatIcon, MatFormFieldModule],
+  templateUrl: './search-bar.component.html',
+  styleUrls: ['./search-bar.component.scss'],
 })
 export class SearchBarComponent {
   search = model<string>('');

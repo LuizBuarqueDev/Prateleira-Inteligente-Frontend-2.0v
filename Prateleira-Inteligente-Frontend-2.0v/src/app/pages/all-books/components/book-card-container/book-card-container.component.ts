@@ -18,7 +18,6 @@ export class BookCardContainerComponent {
   constructor() {
     effect(() => {
       const term = this.searchTerm();
-      console.log('CONTAINER TERM:', term);
       this.bookService.setSearchTerm(term);
     });
   }
