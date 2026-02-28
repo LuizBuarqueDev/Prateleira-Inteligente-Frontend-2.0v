@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, computed, effect, inject, input } from '@angular/core';
 import { BookService } from '@services/book.service';
 import { CommonModule } from '@angular/common';
 import { BookCardComponent } from './book-card/book-card.component';
@@ -11,5 +11,17 @@ import { BookCardComponent } from './book-card/book-card.component';
   imports: [CommonModule, BookCardComponent],
 })
 export class BookCardContainerComponent {
-  books = inject(BookService).simplifiedBooks;
+  private bookService = inject(BookService);
+
+  searchTerm = input.required<string>();
+
+  constructor() {
+    effect(() => {
+      const term = this.searchTerm();
+      console.log('CONTAINER TERM:', term);
+      this.bookService.setSearchTerm(term);
+    });
+  }
+
+  books = this.bookService.searchedSimplifiedBooks;
 }
