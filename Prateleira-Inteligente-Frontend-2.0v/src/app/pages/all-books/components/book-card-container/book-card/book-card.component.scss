@@ -4,8 +4,9 @@
   flex-direction: column;
   background-color: var(--light);
   border-radius: 12px;
+  border: 1px solid var(--light-border);
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 
   .img-container {
     display: flex;

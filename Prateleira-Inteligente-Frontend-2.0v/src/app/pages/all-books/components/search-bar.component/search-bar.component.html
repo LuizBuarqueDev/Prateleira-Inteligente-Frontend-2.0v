@@ -1,3 +1,9 @@
 <div class="search-container">
-  <input type="text" [formControl]="searchControl" placeholder="Buscar livro..." />
+  <mat-icon class="search-icon">search</mat-icon>
+
+  <input
+    type="text"
+    [formControl]="searchControl"
+    placeholder="Buscar por título, autor ou categoria..."
+  />
 </div>
