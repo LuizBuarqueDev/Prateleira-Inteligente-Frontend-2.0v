@@ -1,7 +1,10 @@
 <div class="main-container">
   <h1>Todos os livros</h1>
   <p>Explore nossa coleção de livros</p>
+
+  <app-search-bar [(search)]="searchTerm" />
+
   <div class="books-container">
-    <app-book-card-container />
+    <app-book-card-container [searchTerm]="searchTerm()" />
   </div>
 </div>
