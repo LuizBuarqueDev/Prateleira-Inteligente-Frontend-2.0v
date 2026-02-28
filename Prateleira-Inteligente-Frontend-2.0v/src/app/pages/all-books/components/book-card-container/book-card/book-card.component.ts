@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, input } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { BookSimplified } from '@app/shared/models/simplified/book-simplified.model';
-import { CategoryCardComponent } from './category-card/category-card.component';
+import { CategoryCardComponent } from '@app/shared/components/category-card/category-card.component';
 
 @Component({
   selector: 'app-book-card',
