@@ -1,0 +1,25 @@
+<div class="lib-stat">
+  <div class="stat-item">
+    <div class="stat-header">
+      <span class="stat-label">Total Books</span>
+      <mat-icon class="stat-icon">import_contacts</mat-icon>
+    </div>
+    <span class="stat-value">{{ totalBooks() }}</span>
+  </div>
+
+  <div class="stat-item">
+    <div class="stat-header">
+      <span class="stat-label">Com PDF</span>
+      <mat-icon class="stat-icon">check_circle_unread</mat-icon>
+    </div>
+    <span class="stat-value">{{ totalWithPDF() }}</span>
+  </div>
+
+  <div class="stat-item">
+    <div class="stat-header">
+      <span class="stat-label">Sem PDF</span>
+      <mat-icon class="stat-icon">x_circle</mat-icon>
+    </div>
+    <span class="stat-value">{{ totalWithoutPDF() }}</span>
+  </div>
+</div>
