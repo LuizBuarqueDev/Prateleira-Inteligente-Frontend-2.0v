@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { UserBookService } from '@app/http/services/user-book.service';
 
 @Component({
   standalone: true,
@@ -8,5 +9,5 @@ import { Component } from '@angular/core';
   imports: [],
 })
 export class LibTableComponent {
-  displayedColumns: string[] = [];
+  userBooks = inject(UserBookService).userBooksByUserId;
 }
