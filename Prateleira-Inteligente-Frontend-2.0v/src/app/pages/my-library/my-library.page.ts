@@ -8,4 +8,4 @@ import { LibTableComponent } from './components/lib-table/lib-table.component';
   styleUrl: './my-library.page.scss',
   imports: [LibStatComponent, LibTableComponent],
 })
-export class MyLibraryComponent {}
+export class MyLibraryPage {}
