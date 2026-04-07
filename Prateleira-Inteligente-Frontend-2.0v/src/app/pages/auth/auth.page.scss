@@ -6,6 +6,7 @@
   background: var(--gradient-1);
 
   .auth-header {
+    margin-bottom: 20px;
     color: var(--light);
     display: flex;
     flex-direction: column;
@@ -28,7 +29,42 @@
   }
 
   .auth-container {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+
+    padding: 70px;
     border-radius: 12px;
     background-color: var(--light);
+    border: 2px solid var(--purple-1);
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+
+    h2 {
+      color: var(--dark);
+      margin-bottom: 50px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    a {
+      color: var(--purple-1);
+      text-decoration: none;
+      font-weight: bold;
+      align-self: flex-end;
+
+      &:hover {
+        text-decoration: underline;
+      }
+
+      btn-login {
+        margin-top: 20px;
+        width: 100%;
+        background-color: var(--purple-1);
+      }
+    }
   }
 }
