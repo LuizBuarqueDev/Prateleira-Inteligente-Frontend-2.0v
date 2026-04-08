@@ -59,11 +59,20 @@
       &:hover {
         text-decoration: underline;
       }
+    }
 
-      btn-login {
-        margin-top: 20px;
-        width: 100%;
-        background-color: var(--purple-1);
+    .btn-login {
+      height: 50px;
+      margin-top: 20px;
+      width: 100%;
+      background: var(--gradient-2);
+      color: var(--light);
+      border-radius: 12px;
+
+      &:hover {
+        filter: brightness(0.9);
+        transform: translateY(-1px);
+        color: var(--light);
       }
     }
   }
