@@ -5,12 +5,14 @@
     <p>Gerencie e leia seus livros digitais</p>
   </div>
 
-  <div class="auth-container">
+  <!-- LOGIN -->
+  <div class="auth-container" *ngIf="isLoginMode; else registerTemplate">
     <h2>Entrar na sua conta</h2>
-    <form class="auth-form">
+
+    <form class="auth-form" [formGroup]="loginForm" (ngSubmit)="onLogin()">
       <mat-form-field appearance="outline">
-        <mat-label>Email</mat-label>
-        <input matInput formControlName="email" type="email" />
+        <mat-label>Usuário</mat-label>
+        <input matInput formControlName="username" type="text" />
       </mat-form-field>
 
       <mat-form-field appearance="outline">
@@ -20,7 +22,43 @@
 
       <a href="">Esqueceu sua senha?</a>
 
-      <button mat-raised-button class="btn-login">Entrar</button>
+      <button mat-raised-button class="btn-login" type="submit">Entrar</button>
+
+      <p class="switch-mode">
+        Não possui conta?
+        <button mat-button type="button" (click)="isLoginMode = false">Criar conta</button>
+      </p>
     </form>
   </div>
+
+  <!-- REGISTER -->
+  <ng-template #registerTemplate>
+    <div class="auth-container">
+      <h2>Criar conta</h2>
+
+      <form class="auth-form" [formGroup]="registerForm" (ngSubmit)="onRegister()">
+        <mat-form-field appearance="outline">
+          <mat-label>Usuário</mat-label>
+          <input matInput formControlName="username" type="text" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" type="email" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Senha</mat-label>
+          <input matInput formControlName="password" type="password" />
+        </mat-form-field>
+
+        <button mat-raised-button class="btn-login" type="submit">Criar conta</button>
+
+        <p class="switch-mode">
+          Já possui conta?
+          <button mat-button type="button" (click)="isLoginMode = true">Entrar</button>
+        </p>
+      </form>
+    </div>
+  </ng-template>
 </div>

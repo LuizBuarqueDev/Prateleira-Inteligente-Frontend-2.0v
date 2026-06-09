@@ -1,14 +1,33 @@
-import { Injectable, inject, PLATFORM_ID } from '@angular/core';
+import { Injectable, PLATFORM_ID, inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { API_CONFIG } from '../api.config';
+
+import { LoginRequest } from '@models/auth/login-request.model';
+import { RegisterRequest } from '@models/auth/register-request.model';
+import { TokenResponse } from '@models/auth/response.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+  private http = inject(HttpClient);
   private platformId = inject(PLATFORM_ID);
+
+  private url = `${API_CONFIG.baseUrl}/auth`;
 
   private get storageAvailable(): boolean {
     return isPlatformBrowser(this.platformId);
+  }
+
+  loginRequest(dto: LoginRequest) {
+    return this.http.post<TokenResponse>(`${this.url}/login`, dto);
+  }
+
+  registerRequest(dto: RegisterRequest) {
+    return this.http.post(`${this.url}/register`, dto, {
+      responseType: 'text',
+    });
   }
 
   login(token: string, username: string) {
