@@ -10,7 +10,8 @@ import { MatIcon } from '@angular/material/icon';
   standalone: true,
   imports: [CommonModule, MatIcon],
 })
-
 export class RatedBooksCardsComponent {
-  books = inject(BookService).simplifiedBooks;
+  books = inject(BookService);
+
+  readonly ratedBooks = this.books.simplifiedBooks;
 }
