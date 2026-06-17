@@ -4,6 +4,8 @@ import { firstValueFrom } from 'rxjs';
 
 import { BookService } from '@services/book.service';
 import { BookCardComponent } from './book-card/book-card.component';
+import { PageResponse } from '@models/page-response.model';
+import { BookSimplified } from '@models/simplified/book-simplified.model';
 
 @Component({
   selector: 'app-book-card-container',
@@ -25,10 +27,18 @@ export class BookCardContainerComponent {
         this.bookService.searchSimplifiedBooks({
           term: params,
           page: 0,
-          size: 20,
+          size: 10,
         }),
       ),
 
-    defaultValue: [],
+    defaultValue: {
+      content: [],
+      totalElements: 0,
+      totalPages: 0,
+      size: 20,
+      number: 0,
+      first: true,
+      last: true,
+    } satisfies PageResponse<BookSimplified>,
   });
 }
