@@ -35,7 +35,7 @@ export class BookCardContainerComponent {
       content: [],
       totalElements: 0,
       totalPages: 0,
-      size: 20,
+      size: 10,
       number: 0,
       first: true,
       last: true,
