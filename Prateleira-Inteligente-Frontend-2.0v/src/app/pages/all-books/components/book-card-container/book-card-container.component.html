@@ -4,8 +4,8 @@
   } @else if (books.error()) {
     <p>Erro ao carregar livros</p>
   } @else {
-    @for (book of books.value(); track book.id) {
-      <app-book-card [book]="book"></app-book-card>
+    @for (book of books.value().content; track book.id) {
+      <app-book-card [book]="book" />
     }
   }
 </div>

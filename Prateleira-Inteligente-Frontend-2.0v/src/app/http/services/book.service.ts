@@ -11,39 +11,25 @@ import { BookSortField } from '@models/enums/book-sort-field.enum';
 
 @Injectable({ providedIn: 'root' })
 export class BookService extends GenericService<Book> {
-
   constructor() {
     super('/books');
   }
 
   getSimplifiedBooks() {
-    return this.http.get<BookSimplified[]>(
-      `${this.url}/simplified`
-    );
+    return this.http.get<BookSimplified[]>(`${this.url}/simplified`);
   }
 
   searchSimplifiedBooks(params: SearchParams) {
-    return this.http.get<BookSimplified[]>(
-      `${this.url}/search`,
-      {
-        params: {
-          term: params.term,
-          page: params.page,
-          size: params.size,
-        },
-      }
-    );
+    return this.http.get<PageResponse<BookSimplified>>(`${this.url}/search`, {
+      params: {
+        term: params.term,
+        page: params.page,
+        size: params.size,
+      },
+    });
   }
 
-  getPagedBooks(params: {
-    page: number;
-    size: number;
-    sortBy: BookSortField;
-    direction: boolean;
-  }) {
-    return this.http.get<PageResponse<BookSimplified>>(
-      `${this.url}/page`,
-      { params }
-    );
+  getPagedBooks(params: { page: number; size: number; sortBy: BookSortField; direction: boolean }) {
+    return this.http.get<PageResponse<BookSimplified>>(`${this.url}/page`, { params });
   }
 }
