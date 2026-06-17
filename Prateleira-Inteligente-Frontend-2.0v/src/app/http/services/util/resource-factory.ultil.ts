@@ -8,4 +8,16 @@ export abstract class ResourceFactory {
       defaultValue,
     });
   }
+
+  protected createParamResource<T, P>(
+    params: () => P,
+    request: (params: P) => Observable<T>,
+    defaultValue: T,
+  ) {
+    return resource<T, P>({
+      params,
+      loader: ({ params }) => firstValueFrom(request(params)),
+      defaultValue,
+    });
+  }
 }

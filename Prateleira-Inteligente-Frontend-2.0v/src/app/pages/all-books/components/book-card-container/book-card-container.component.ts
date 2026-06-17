@@ -1,8 +1,8 @@
-import { Component, effect, inject, input } from '@angular/core';
+import { Component, inject, input, resource } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { firstValueFrom } from 'rxjs';
 
 import { BookService } from '@services/book.service';
-
 import { BookCardComponent } from './book-card/book-card.component';
 
 @Component({
@@ -13,15 +13,22 @@ import { BookCardComponent } from './book-card/book-card.component';
   imports: [CommonModule, BookCardComponent],
 })
 export class BookCardContainerComponent {
-  private bookService = inject(BookService);
+  private readonly bookService = inject(BookService);
 
-  searchTerm = input.required<string>();
+  readonly searchTerm = input.required<string>();
 
-  books = this.bookService.searchSimplifiedBooks;
+  readonly books = resource({
+    params: () => this.searchTerm(),
 
-  constructor() {
-    effect(() => {
-      this.bookService.setSearchTerm(this.searchTerm());
-    });
-  }
+    loader: ({ params }) =>
+      firstValueFrom(
+        this.bookService.searchSimplifiedBooks({
+          term: params,
+          page: 0,
+          size: 20,
+        }),
+      ),
+
+    defaultValue: [],
+  });
 }
