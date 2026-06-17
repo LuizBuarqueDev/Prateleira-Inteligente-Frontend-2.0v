@@ -3,7 +3,7 @@ import { GenericService } from '@services/generic.service';
 import { Categories } from '@models/categories.model';
 
 @Injectable({ providedIn: 'root' })
-export class CategoriesService extends GenericService<Categories> {
+export class CategoryService extends GenericService<Categories> {
   constructor() {
     super('/categories');
   }
