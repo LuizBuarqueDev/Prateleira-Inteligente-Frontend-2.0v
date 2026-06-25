@@ -1,4 +1,35 @@
-@if (book(); as book) {
-  <h1>{{ book.title }}</h1>
-  <p>{{ book.publisher }}</p>
-}
+<div class="main-container">
+  <div class="go-back">
+    <a class="btn-custom" (click)="goBackPage()">
+      <mat-icon>arrow_back</mat-icon> Voltar para pagina anterior
+    </a>
+  </div>
+
+  @if (book(); as book) {
+    <div class="book-container">
+      <div class="book-left">
+        <div class="book-image-container">
+          <img
+            class="img-16-9"
+            [src]="
+              book.cover ||
+              'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg'
+            "
+          />
+        </div>
+
+        <div class="book-actions">
+          <button>Na sua biblioteca</button>
+          <button>Baixar PDF</button>
+        </div>
+      </div>
+
+      <div class="book-right">
+        <h2>{{ book.title }}</h2>
+        <p>{{ book.description }}</p>
+        <p><strong>Ano:</strong> {{ book.publicationDate }}</p>
+        <p><strong>Editora:</strong> {{ book.publisher }}</p>
+      </div>
+    </div>
+  }
+</div>
