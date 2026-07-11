@@ -1,9 +1,8 @@
-@if (books.isLoading()) {
+@if (pagedBooks.isLoading()) {
   <p>Carregando...</p>
-} @else if (books.error()) {
-  <p>Erro ao carregar livros</p>
+} @else if (pagedBooks.error()) {
 } @else {
-  @for (book of books.value(); track book.id) {
+  @for (book of pagedBooks.value().content; track book.id) {
     <div class="rated-books-cards">
       <div class="book-info">
         <div class="img-container">

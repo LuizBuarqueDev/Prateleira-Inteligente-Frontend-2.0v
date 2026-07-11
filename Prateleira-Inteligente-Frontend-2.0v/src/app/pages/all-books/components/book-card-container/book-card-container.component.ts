@@ -1,9 +1,11 @@
-import { Component, effect, inject, input } from '@angular/core';
+import { Component, inject, input, resource } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { firstValueFrom } from 'rxjs';
 
 import { BookService } from '@services/book.service';
-
 import { BookCardComponent } from './book-card/book-card.component';
+import { PageResponse } from '@models/page-response.model';
+import { BookSimplified } from '@models/simplified/book-simplified.model';
 
 @Component({
   selector: 'app-book-card-container',
@@ -13,15 +15,30 @@ import { BookCardComponent } from './book-card/book-card.component';
   imports: [CommonModule, BookCardComponent],
 })
 export class BookCardContainerComponent {
-  private bookService = inject(BookService);
+  private readonly bookService = inject(BookService);
 
-  searchTerm = input.required<string>();
+  readonly searchTerm = input.required<string>();
 
-  books = this.bookService.searchSimplifiedBooks;
+  readonly books = resource({
+    params: () => this.searchTerm(),
 
-  constructor() {
-    effect(() => {
-      this.bookService.setSearchTerm(this.searchTerm());
-    });
-  }
+    loader: ({ params }) =>
+      firstValueFrom(
+        this.bookService.searchSimplifiedBooks({
+          term: params,
+          page: 0,
+          size: 10,
+        }),
+      ),
+
+    defaultValue: {
+      content: [],
+      totalElements: 0,
+      totalPages: 0,
+      size: 10,
+      number: 0,
+      first: true,
+      last: true,
+    } satisfies PageResponse<BookSimplified>,
+  });
 }

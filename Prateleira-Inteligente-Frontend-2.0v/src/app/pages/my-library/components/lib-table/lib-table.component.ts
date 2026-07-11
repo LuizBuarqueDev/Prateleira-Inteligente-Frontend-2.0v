@@ -1,5 +1,8 @@
 import { Component, inject } from '@angular/core';
+
 import { UserBookService } from '@app/http/services/user-book.service';
+import { ResourceFactory } from '@services/util/resource-factory.ultil';
+import { UserBook } from '@models/user-book.model';
 
 @Component({
   standalone: true,
@@ -8,6 +11,11 @@ import { UserBookService } from '@app/http/services/user-book.service';
   styleUrls: ['./lib-table.component.scss'],
   imports: [],
 })
-export class LibTableComponent {
-  userBooks = inject(UserBookService).userBooksByUserId;
+export class LibTableComponent extends ResourceFactory {
+  private readonly userBookService = inject(UserBookService);
+
+  readonly userBooks = this.createResource<UserBook[]>(
+    () => this.userBookService.getByUserId(),
+    [],
+  );
 }
