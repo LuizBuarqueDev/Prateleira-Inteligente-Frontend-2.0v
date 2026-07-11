@@ -1,9 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Signal, inject, resource } from '@angular/core';
-import { firstValueFrom } from 'rxjs';
-import { API_CONFIG } from '../api.config';
-
-export abstract class GenericService<T> {
+import { inject } from '@angular/core';
+import { API_CONFIG } from '../api.config';export abstract class GenericService<T> {
   protected http = inject(HttpClient);
   protected baseUrl = API_CONFIG.baseUrl;
 
@@ -25,30 +22,21 @@ export abstract class GenericService<T> {
     return this.http.delete<void>(`${this.url}/${id}`);
   }
 
-  // HELPER
-  protected r<R>(load: () => Promise<R>, defaultValue: R) {
-    return resource<R, void>({ loader: load, defaultValue });
+  getAll() {
+    return this.http.get<T[]>(this.url);
   }
 
-  // (Resources)
-  readonly all = this.r(() => firstValueFrom(this.http.get<T[]>(this.url)), []);
-
-  readonly total = this.r(() => firstValueFrom(this.http.get<number>(`${this.url}/count`)), 0);
-
-  byId(id: Signal<string>) {
-    return this.r(
-      () => firstValueFrom(this.http.get<T>(`${this.url}/${id()}`)),
-      null as unknown as T
-    );
+  getById(id: string) {
+    return this.http.get<T>(`${this.url}/${id}`);
   }
 
-  byIds(ids: Signal<string[]>) {
-    return this.r(
-      () =>
-        firstValueFrom(
-          this.http.get<T[]>(`${this.url}/ids`, { params: { ids: ids() } })
-        ),
-      []
-    );
+  getByIds(ids: string[]) {
+    return this.http.get<T[]>(`${this.url}/ids`, {
+      params: { ids }
+    });
+  }
+
+  count() {
+    return this.http.get<number>(`${this.url}/count`);
   }
 }

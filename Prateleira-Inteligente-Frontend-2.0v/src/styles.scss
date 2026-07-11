@@ -1,7 +1,6 @@
 @use '@angular/material' as mat;
 @use './base.scss';
 
-/* 🔥 SUA COR PRINCIPAL (simplificado e compatível com Material 3) */
 $my-primary: mat.$violet-palette;
 
 html {
@@ -19,13 +18,11 @@ html {
   );
 }
 
-/* ICONES */
 mat-icon {
   font-family: 'Material Symbols Outlined';
   font-variation-settings: 'FILL' 0;
 }
 
-/* BODY */
 body {
   color-scheme: light;
   background-color: var(--mat-sys-surface);
@@ -35,7 +32,6 @@ body {
   height: 100%;
 }
 
-/* LAYOUT */
 .main-container {
   display: flex;
   flex-direction: column;

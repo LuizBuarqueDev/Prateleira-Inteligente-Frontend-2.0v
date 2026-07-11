@@ -9,7 +9,7 @@
     />
   </div>
   <div class="book-info">
-    <h3>{{ book()?.title }}</h3>
+    <h3 [routerLink]="'/book/' + book()?.id">{{ book()?.title }}</h3>
     <p>{{ book()?.publisher }}</p>
     <div class="rating-section">
       <mat-icon>star_shine</mat-icon>
