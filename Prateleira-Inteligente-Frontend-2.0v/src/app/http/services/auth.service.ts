@@ -6,6 +6,7 @@ import { API_CONFIG } from '../api.config';
 import { LoginRequest } from '@models/auth/login-request.model';
 import { RegisterRequest } from '@models/auth/register-request.model';
 import { TokenResponse } from '@models/auth/response.model';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +16,8 @@ export class AuthService {
   private platformId = inject(PLATFORM_ID);
 
   private url = `${API_CONFIG.baseUrl}/auth`;
+
+  private router = inject(Router);
 
   private get storageAvailable(): boolean {
     return isPlatformBrowser(this.platformId);
@@ -42,6 +45,8 @@ export class AuthService {
 
     localStorage.removeItem('token');
     localStorage.removeItem('username');
+
+    this.router.navigate(['/auth']);
   }
 
   isAuthenticated(): boolean {
