@@ -12,36 +12,47 @@
       </div>
 
       <nav class="menu">
-        <a
-          class="btn"
-          mat-button
-          routerLink="/"
-          routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }"
-          (click)="drawer.close()"
-        >
-          <mat-icon>dashboard</mat-icon>Home
-        </a>
+        <div class="menu-items">
+          <a
+            class="btn"
+            mat-button
+            routerLink="/"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            (click)="drawer.close()"
+          >
+            <mat-icon>dashboard</mat-icon>
+            Home
+          </a>
 
-        <a
-          class="btn"
-          mat-button
-          routerLink="/books"
-          routerLinkActive="active"
-          (click)="drawer.close()"
-        >
-          <mat-icon>shelves</mat-icon>Todos os Livros
-        </a>
+          <a
+            class="btn"
+            mat-button
+            routerLink="/books"
+            routerLinkActive="active"
+            (click)="drawer.close()"
+          >
+            <mat-icon>shelves</mat-icon>
+            Todos os Livros
+          </a>
 
-        <a
-          class="btn"
-          mat-button
-          routerLink="/library"
-          routerLinkActive="active"
-          (click)="drawer.close()"
-        >
-          <mat-icon>collections_bookmark</mat-icon>Sua Biblioteca
-        </a>
+          <a
+            class="btn"
+            mat-button
+            routerLink="/library"
+            routerLinkActive="active"
+            (click)="drawer.close()"
+          >
+            <mat-icon>collections_bookmark</mat-icon>
+            Sua Biblioteca
+          </a>
+        </div>
+        <div class="menu-logout">
+          <a class="btn" mat-button (click)="drawer.close(); authService.logout()">
+            <mat-icon>logout</mat-icon>
+            Sair
+          </a>
+        </div>
       </nav>
     </div>
   </mat-drawer>
