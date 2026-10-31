@@ -55,8 +55,9 @@ export class BookCoverComponent {
       this.reading.set(false);
     };
     reader.onerror = () => {
+      const error = reader.error;
       this.removeCover();
-      this.errors.handle(reader.error);
+      this.errors.handle(error);
     };
     reader.readAsDataURL(file);
   }

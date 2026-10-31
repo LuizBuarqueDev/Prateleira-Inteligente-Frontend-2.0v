@@ -9,29 +9,29 @@
 
   @if (book.hasValue()) {
     @if (book.value(); as book) {
-    <div class="book-container">
-      <div class="book-left">
-        <div class="book-image-container">
-          <img
-            class="img-16-9"
-            [src]="book.cover | bookCover"
-            [alt]="'Capa de ' + book.title"
-          />
+      <div class="book-container">
+        <div class="book-left">
+          <div class="book-image-container">
+            <img
+              class="img-16-9"
+              [src]="book.cover | bookCover"
+              [alt]="'Capa de ' + book.title"
+            />
+          </div>
+
+          <div class="book-actions">
+            <button>Na sua biblioteca</button>
+            <button>Baixar PDF</button>
+          </div>
         </div>
 
-        <div class="book-actions">
-          <button>Na sua biblioteca</button>
-          <button>Baixar PDF</button>
+        <div class="book-right">
+          <h2>{{ book.title }}</h2>
+          <p>{{ book.description }}</p>
+          <p><strong>Ano:</strong> {{ book.publicationDate }}</p>
+          <p><strong>Editora:</strong> {{ book.publisher }}</p>
         </div>
       </div>
-
-      <div class="book-right">
-        <h2>{{ book.title }}</h2>
-        <p>{{ book.description }}</p>
-        <p><strong>Ano:</strong> {{ book.publicationDate }}</p>
-        <p><strong>Editora:</strong> {{ book.publisher }}</p>
-      </div>
-    </div>
     }
   }
 </div>

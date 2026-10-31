@@ -1,7 +1,6 @@
 import { isPlatformBrowser } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { inject, Injectable, PLATFORM_ID } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { inject, Injectable, Injector, PLATFORM_ID } from '@angular/core';
 import { catchError, EMPTY, MonoTypeOperatorFunction } from 'rxjs';
 
 const HTTP_ERROR_MESSAGES: Readonly<Record<number, string>> = {
@@ -18,7 +17,7 @@ const HTTP_ERROR_MESSAGES: Readonly<Record<number, string>> = {
 
 @Injectable({ providedIn: 'root' })
 export class AppErrorService {
-  private readonly snackBar = inject(MatSnackBar);
+  private readonly injector = inject(Injector);
   private readonly platformId = inject(PLATFORM_ID);
   private readonly handledErrors = new WeakSet<object>();
   private lastMessage = '';
@@ -41,7 +40,11 @@ export class AppErrorService {
 
     this.lastMessage = message;
     this.lastNotificationAt = now;
-    this.snackBar.open(message, 'Fechar', { duration: 6000 });
+    void import('@angular/material/snack-bar')
+      .then(({ MatSnackBar }) => {
+        this.injector.get(MatSnackBar).open(message, 'Fechar', { duration: 6000 });
+      })
+      .catch((notificationError: unknown) => console.error(notificationError));
   }
 
   completeOnError<T>(): MonoTypeOperatorFunction<T> {

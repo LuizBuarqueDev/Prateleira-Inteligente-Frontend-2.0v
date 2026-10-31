@@ -12,12 +12,12 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
-  private http = inject(HttpClient);
-  private platformId = inject(PLATFORM_ID);
+  private readonly http = inject(HttpClient);
+  private readonly platformId = inject(PLATFORM_ID);
 
-  private url = `${API_CONFIG.baseUrl}/auth`;
+  private readonly url = `${API_CONFIG.baseUrl}/auth`;
 
-  private router = inject(Router);
+  private readonly router = inject(Router);
 
   private get storageAvailable(): boolean {
     return isPlatformBrowser(this.platformId);
@@ -46,7 +46,7 @@ export class AuthService {
     localStorage.removeItem('token');
     localStorage.removeItem('username');
 
-    this.router.navigate(['/auth']);
+    void this.router.navigate(['/auth']);
   }
 
   isAuthenticated(): boolean {
