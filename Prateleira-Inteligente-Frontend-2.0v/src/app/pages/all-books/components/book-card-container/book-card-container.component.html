@@ -1,4 +1,4 @@
-<div class="book-grid">
+<div class="book-grid" [attr.aria-busy]="books.isLoading()">
   @if (books.isLoading()) {
     <p>Carregando...</p>
   } @else if (books.error()) {
@@ -6,6 +6,20 @@
   } @else {
     @for (book of books.value().content; track book.id) {
       <app-book-card [book]="book" />
+    } @empty {
+      <p role="status">Nenhum livro encontrado.</p>
     }
   }
 </div>
+
+<mat-paginator
+  class="books-paginator"
+  aria-label="Paginação dos livros"
+  [length]="books.hasValue() ? books.value().totalElements : 0"
+  [pageIndex]="pageIndex()"
+  [pageSize]="pageSize()"
+  [pageSizeOptions]="[5, 10, 20]"
+  [disabled]="books.isLoading() || !!books.error()"
+  showFirstLastButtons
+  (page)="onPageChange($event)"
+/>
