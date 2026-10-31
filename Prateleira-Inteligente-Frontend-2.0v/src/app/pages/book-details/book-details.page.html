@@ -5,7 +5,10 @@
     </a>
   </div>
 
-  @if (book(); as book) {
+  <app-resource-state [resource]="book" />
+
+  @if (book.hasValue()) {
+    @if (book.value(); as book) {
     <div class="book-container">
       <div class="book-left">
         <div class="book-image-container">
@@ -29,5 +32,6 @@
         <p><strong>Editora:</strong> {{ book.publisher }}</p>
       </div>
     </div>
+    }
   }
 </div>

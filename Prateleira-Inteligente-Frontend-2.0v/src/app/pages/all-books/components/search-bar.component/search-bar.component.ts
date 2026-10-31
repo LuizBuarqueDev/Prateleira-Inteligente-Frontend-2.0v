@@ -1,4 +1,5 @@
 import { Component, model } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { MatIcon } from '@angular/material/icon';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
@@ -18,7 +19,7 @@ export class SearchBarComponent {
 
   constructor() {
     this.searchControl.valueChanges
-      .pipe(debounceTime(500), distinctUntilChanged())
+      .pipe(debounceTime(500), distinctUntilChanged(), takeUntilDestroyed())
       .subscribe((value) => {
         this.search.set(value ?? '');
       });

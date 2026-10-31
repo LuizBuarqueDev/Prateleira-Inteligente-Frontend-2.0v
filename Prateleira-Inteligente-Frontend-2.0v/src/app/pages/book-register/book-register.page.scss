@@ -60,21 +60,8 @@
   }
 }
 
-.loading-state,
 .empty-message {
   color: var(--dark-gray);
-}
-
-.error-message {
-  color: var(--danger);
-
-  p {
-    margin-top: 0;
-  }
-}
-
-.save-error {
-  margin-top: 24px;
 }
 
 .form-actions {

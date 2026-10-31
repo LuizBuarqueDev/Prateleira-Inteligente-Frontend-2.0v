@@ -1,13 +1,12 @@
 import { Component, inject } from '@angular/core';
 
-import { ResourceFactory } from '@services/util/resource-factory.ultil';
+import { ResourceFactory } from '@services/util/resource-factory.util';
 
 import { BookService } from '@services/book.service';
-import { AuthorService } from '@services/author.service';
 import { CategoryService } from '@services/category.service';
 import { UserService } from '@services/user.service';
 import { GenericStatcardComponent } from '../statcard/generic/generic-statcard.component';
-import { CommentService } from '@app/http/services/comment.service';
+import { CommentService } from '@services/comment.service';
 
 @Component({
   selector: 'app-stats-cards-container',

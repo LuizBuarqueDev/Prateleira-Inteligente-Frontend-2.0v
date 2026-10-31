@@ -1,7 +1,6 @@
-@if (pagedBooks.isLoading()) {
-  <p>Carregando...</p>
-} @else if (pagedBooks.error()) {
-} @else {
+<app-resource-state [resource]="pagedBooks" />
+
+@if (pagedBooks.hasValue() && !pagedBooks.isLoading()) {
   @for (book of pagedBooks.value().content; track book.id) {
     <div class="rated-books-cards">
       <div class="book-info">

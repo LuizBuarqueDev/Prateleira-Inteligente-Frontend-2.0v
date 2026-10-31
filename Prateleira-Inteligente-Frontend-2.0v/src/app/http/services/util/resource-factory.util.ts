@@ -1,10 +1,10 @@
-import { resource } from '@angular/core';
-import { firstValueFrom, Observable } from 'rxjs';
+import { rxResource } from '@angular/core/rxjs-interop';
+import { Observable } from 'rxjs';
 
 export abstract class ResourceFactory {
   protected createResource<T>(request: () => Observable<T>, defaultValue: T) {
-    return resource<T, void>({
-      loader: () => firstValueFrom(request()),
+    return rxResource<T, void>({
+      stream: request,
       defaultValue,
     });
   }
@@ -14,9 +14,9 @@ export abstract class ResourceFactory {
     request: (params: P) => Observable<T>,
     defaultValue: T,
   ) {
-    return resource<T, P>({
+    return rxResource<T, P>({
       params,
-      loader: ({ params }) => firstValueFrom(request(params)),
+      stream: ({ params }) => request(params),
       defaultValue,
     });
   }

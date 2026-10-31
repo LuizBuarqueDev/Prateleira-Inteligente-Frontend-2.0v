@@ -1,9 +1,7 @@
+<app-resource-state [resource]="books" />
+
 <div class="book-grid" [attr.aria-busy]="books.isLoading()">
-  @if (books.isLoading()) {
-    <p>Carregando...</p>
-  } @else if (books.error()) {
-    <p>Erro ao carregar livros</p>
-  } @else {
+  @if (books.hasValue() && !books.isLoading()) {
     @for (book of books.value().content; track book.id) {
       <app-book-card [book]="book" />
     } @empty {
@@ -19,7 +17,7 @@
   [pageIndex]="pageIndex()"
   [pageSize]="pageSize()"
   [pageSizeOptions]="[5, 10, 20]"
-  [disabled]="books.isLoading() || !!books.error()"
+  [disabled]="books.isLoading() || !books.hasValue()"
   showFirstLastButtons
   (page)="onPageChange($event)"
 />

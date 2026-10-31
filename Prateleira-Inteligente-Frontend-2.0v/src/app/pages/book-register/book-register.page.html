@@ -31,26 +31,15 @@
           </div>
         </header>
 
-        @if (loading()) {
-          <div class="loading-state" role="status">
-            <mat-progress-bar mode="indeterminate" aria-label="Carregando autores e categorias" />
-            <p>Carregando autores e categorias...</p>
-          </div>
-        } @else if (loadError()) {
-          <div class="error-message" role="alert">
-            <p>{{ loadError() }}</p>
-            <button mat-stroked-button type="button" (click)="loadRelationships()">
-              <mat-icon>refresh</mat-icon>
-              Tentar novamente
-            </button>
-          </div>
-        } @else {
+        <app-resource-state [resource]="relationships" />
+
+        @if (relationships.hasValue() && !relationships.isLoading()) {
           <app-book-relationships
             [form]="form.controls.relationships"
-            [authors]="authors()"
-            [categories]="categories()"
+            [authors]="relationships.value().authors"
+            [categories]="relationships.value().categories"
           />
-          @if (!authors().length || !categories().length) {
+          @if (!relationships.value().authors.length || !relationships.value().categories.length) {
             <p class="empty-message" role="status">
               Algumas listas estão vazias. Você pode cadastrar o livro sem autores ou categorias.
             </p>
@@ -58,10 +47,6 @@
         }
       </section>
     </div>
-
-    @if (saveError()) {
-      <p class="error-message save-error" role="alert">{{ saveError() }}</p>
-    }
 
     <footer class="form-actions">
       <button mat-stroked-button type="button" routerLink="/books" [disabled]="saving()">

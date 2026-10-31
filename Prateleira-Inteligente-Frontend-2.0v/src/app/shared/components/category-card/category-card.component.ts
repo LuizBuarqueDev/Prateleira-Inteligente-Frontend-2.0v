@@ -1,5 +1,5 @@
 import { Component, computed, inject, input } from '@angular/core';
-import { CategoryColorService } from '@app/http/services/categoryColor.service';
+import { CategoryColorService } from '@services/category-color.service';
 
 @Component({
   standalone: true,

@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { Book } from '@models/book.model';
+import { AppErrorService } from '@app/core/errors/app-error.service';
 
 @Component({
   selector: 'app-book-cover',
@@ -14,9 +15,10 @@ export class BookCoverComponent {
   readonly control = input.required<FormControl<Book['cover']>>();
   readonly preview = signal('');
   readonly fileName = signal('');
-  readonly error = signal('');
+  readonly validationMessage = signal('');
   readonly reading = signal(false);
   private reader?: FileReader;
+  private readonly errors = inject(AppErrorService);
 
   constructor() {
     inject(DestroyRef).onDestroy(() => this.reader?.abort());
@@ -32,12 +34,12 @@ export class BookCoverComponent {
     this.control().markAsTouched();
 
     if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.type)) {
-      this.setError('Selecione uma imagem JPG, PNG ou WebP.');
+      this.setValidationError('Selecione uma imagem JPG, PNG ou WebP.');
       return;
     }
 
     if (file.size > 5 * 1024 * 1024) {
-      this.setError('A imagem deve ter no máximo 5 MB.');
+      this.setValidationError('A imagem deve ter no máximo 5 MB.');
       return;
     }
 
@@ -53,8 +55,8 @@ export class BookCoverComponent {
       this.reading.set(false);
     };
     reader.onerror = () => {
-      this.reading.set(false);
-      this.setError('Não foi possível ler a imagem. Selecione o arquivo novamente.');
+      this.removeCover();
+      this.errors.handle(reader.error);
     };
     reader.readAsDataURL(file);
   }
@@ -65,11 +67,11 @@ export class BookCoverComponent {
     this.control().setValue('');
     this.preview.set('');
     this.fileName.set('');
-    this.error.set('');
+    this.validationMessage.set('');
   }
 
-  private setError(message: string): void {
-    this.error.set(message);
+  private setValidationError(message: string): void {
+    this.validationMessage.set(message);
     this.control().setErrors({ invalidImage: true });
   }
 }

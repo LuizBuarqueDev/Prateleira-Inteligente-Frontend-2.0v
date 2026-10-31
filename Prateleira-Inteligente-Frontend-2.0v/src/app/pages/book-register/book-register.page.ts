@@ -1,16 +1,17 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal } from '@angular/core';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
-import { HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, RouterLink } from '@angular/router';
 import { Book } from '@models/book.model';
+import { AppErrorService } from '@app/core/errors/app-error.service';
+import { ResourceStateComponent } from '@app/shared/components/resource-state/resource-state.component';
 import { AuthorService } from '@services/author.service';
 import { BookService } from '@services/book.service';
 import { CategoryService } from '@services/category.service';
+import { ResourceFactory } from '@services/util/resource-factory.util';
 import { finalize, forkJoin } from 'rxjs';
 import { BookInformationComponent } from './components/book-information/book-information.component';
 import { BookRelationshipsComponent } from './components/book-relationships/book-relationships.component';
@@ -22,7 +23,7 @@ import { BookRelationshipsComponent } from './components/book-relationships/book
     RouterLink,
     MatButtonModule,
     MatIconModule,
-    MatProgressBarModule,
+    ResourceStateComponent,
     BookInformationComponent,
     BookRelationshipsComponent,
   ],
@@ -30,7 +31,7 @@ import { BookRelationshipsComponent } from './components/book-relationships/book
   styleUrl: './book-register.page.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BookRegisterPage {
+export class BookRegisterPage extends ResourceFactory {
   private readonly fb = inject(FormBuilder);
   private readonly bookService = inject(BookService);
   private readonly authorService = inject(AuthorService);
@@ -38,13 +39,18 @@ export class BookRegisterPage {
   private readonly router = inject(Router);
   private readonly snackBar = inject(MatSnackBar);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly errors = inject(AppErrorService);
 
-  readonly authors = signal<Book['authors']>([]);
-  readonly categories = signal<Book['categories']>([]);
-  readonly loading = signal(false);
   readonly saving = signal(false);
-  readonly loadError = signal('');
-  readonly saveError = signal('');
+
+  readonly relationships = this.createResource(
+    () =>
+      forkJoin({
+        authors: this.authorService.getAll(),
+        categories: this.categoryService.getAll(),
+      }),
+    { authors: [], categories: [] },
+  );
 
   readonly form = this.fb.group({
     information: this.fb.group({
@@ -61,37 +67,6 @@ export class BookRegisterPage {
   });
 
   readonly formStatus = toSignal(this.form.statusChanges, { initialValue: this.form.status });
-
-  constructor() {
-    this.loadRelationships();
-  }
-
-  loadRelationships(): void {
-    if (this.loading()) return;
-
-    this.loading.set(true);
-    this.loadError.set('');
-
-    forkJoin({
-      authors: this.authorService.getAll(),
-      categories: this.categoryService.getAll(),
-    })
-      .pipe(
-        takeUntilDestroyed(this.destroyRef),
-        finalize(() => this.loading.set(false)),
-      )
-      .subscribe({
-        next: ({ authors, categories }) => {
-          this.authors.set(authors.map(({ id, name }) => ({ id, name })));
-          this.categories.set(categories.map(({ id, name }) => ({ id, name })));
-        },
-        error: () => {
-          this.loadError.set(
-            'Não foi possível carregar os autores e as categorias. Você pode cadastrar o livro sem esses vínculos.',
-          );
-        },
-      });
-  }
 
   save(): void {
     if (this.saving() || this.form.pending) return;
@@ -118,37 +93,29 @@ export class BookRegisterPage {
       description: information.description.trim(),
       cover: information.cover,
       publicationDate: date,
-      ...relationships,
+      authors: relationships.authors.map(({ id, name }) => ({ id, name })),
+      categories: relationships.categories.map(({ id, name }) => ({ id, name })),
       score: null,
       assessmentQuantity: null,
       userBooks: [],
     };
 
     this.saving.set(true);
-    this.saveError.set('');
     this.form.disable();
 
     this.bookService
       .create(book)
       .pipe(
+        this.errors.completeOnError(),
         takeUntilDestroyed(this.destroyRef),
         finalize(() => {
           this.saving.set(false);
           this.form.enable();
         }),
       )
-      .subscribe({
-        next: (createdBook) => {
-          this.snackBar.open('Livro cadastrado com sucesso!', 'Fechar', { duration: 5000 });
-          void this.router.navigate(createdBook?.id ? ['/book', createdBook.id] : ['/books']);
-        },
-        error: (error: HttpErrorResponse) => {
-          this.saveError.set(
-            error.status === 401 || error.status === 403
-              ? 'Você precisa estar conectado e ter permissão para cadastrar livros.'
-              : 'Não foi possível cadastrar o livro. Confira os dados e tente novamente.',
-          );
-        },
+      .subscribe((createdBook) => {
+        this.snackBar.open('Livro cadastrado com sucesso!', 'Fechar', { duration: 5000 });
+        void this.router.navigate(createdBook?.id ? ['/book', createdBook.id] : ['/books']);
       });
   }
 }
