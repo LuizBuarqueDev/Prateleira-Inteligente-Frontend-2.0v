@@ -1,0 +1,37 @@
+<div class="information-fields" [formGroup]="form()">
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Título</mat-label>
+    <input matInput formControlName="title" autocomplete="off" required />
+    <mat-error>Informe o título do livro.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Editora</mat-label>
+    <input matInput formControlName="publisher" autocomplete="off" required />
+    <mat-error>Informe a editora.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Data de publicação</mat-label>
+    <input
+      matInput
+      formControlName="publicationDate"
+      [matDatepicker]="publicationPicker"
+      placeholder="dd/mm/aaaa"
+      readonly
+      required
+    />
+    <mat-datepicker-toggle matIconSuffix [for]="publicationPicker" />
+    <mat-datepicker #publicationPicker startView="multi-year" />
+    <mat-hint>Selecione a data no calendário.</mat-hint>
+    <mat-error>Selecione uma data de publicação válida.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Descrição</mat-label>
+    <textarea matInput formControlName="description" rows="5" required></textarea>
+    <mat-error>Informe a descrição do livro.</mat-error>
+  </mat-form-field>
+
+  <app-book-cover class="full-width" [control]="form().controls.cover" />
+</div>

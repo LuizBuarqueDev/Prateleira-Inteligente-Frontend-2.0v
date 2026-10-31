@@ -1,0 +1,23 @@
+:host {
+  display: block;
+}
+
+.information-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+textarea {
+  resize: vertical;
+}
+
+@media (max-width: 600px) {
+  .information-fields {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

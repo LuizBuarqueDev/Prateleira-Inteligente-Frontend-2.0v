@@ -1,0 +1,45 @@
+<div class="cover-field">
+  <p class="cover-label">Capa do livro <span>(opcional)</span></p>
+  <p class="cover-hint" id="cover-hint">Imagem JPG, PNG ou WebP de até 5 MB.</p>
+
+  @if (preview()) {
+    <img class="cover-preview" [src]="preview()" alt="Prévia da capa selecionada" />
+  }
+
+  <input
+    #coverInput
+    type="file"
+    accept="image/jpeg,image/png,image/webp"
+    aria-label="Selecionar capa do livro"
+    [disabled]="control().disabled"
+    (change)="selectFile($event)"
+    hidden
+  />
+  <div class="cover-actions">
+    <button
+      mat-stroked-button
+      type="button"
+      aria-describedby="cover-hint"
+      [disabled]="control().disabled || reading()"
+      (click)="coverInput.click()"
+    >
+      <mat-icon>upload</mat-icon>
+      {{ preview() ? 'Trocar capa' : 'Selecionar capa' }}
+    </button>
+    @if (preview() || error()) {
+      <button mat-button type="button" [disabled]="control().disabled" (click)="removeCover()">
+        Remover capa
+      </button>
+    }
+  </div>
+
+  @if (reading()) {
+    <p role="status">Carregando imagem...</p>
+  }
+  @if (fileName()) {
+    <p class="file-name">{{ fileName() }}</p>
+  }
+  @if (error()) {
+    <p class="cover-error" role="alert">{{ error() }}</p>
+  }
+</div>

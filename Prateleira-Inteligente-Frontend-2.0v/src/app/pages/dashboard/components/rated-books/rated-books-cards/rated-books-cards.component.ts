@@ -8,13 +8,14 @@ import { BookService } from '@services/book.service';
 import { BookSimplified } from '@models/simplified/book-simplified.model';
 import { PageResponse } from '@models/page-response.model';
 import { BookSortField } from '@models/enums/book-sort-field.enum';
+import { BookCoverPipe } from '@app/shared/pipes/book-cover.pipe';
 
 @Component({
   selector: 'app-rated-books-cards',
   templateUrl: './rated-books-cards.component.html',
   styleUrl: './rated-books-cards.component.scss',
   standalone: true,
-  imports: [CommonModule, MatIcon],
+  imports: [CommonModule, MatIcon, BookCoverPipe],
 })
 export class RatedBooksCardsComponent extends ResourceFactory {
   private readonly bookService = inject(BookService);

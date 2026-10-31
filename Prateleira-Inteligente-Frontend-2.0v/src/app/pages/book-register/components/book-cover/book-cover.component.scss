@@ -1,0 +1,43 @@
+:host {
+  display: block;
+}
+
+.cover-label {
+  margin: 0 0 8px;
+  color: var(--dark);
+  font-weight: 500;
+}
+
+.cover-label span,
+.cover-hint,
+.file-name {
+  color: var(--dark-gray);
+}
+
+.cover-hint {
+  margin: 0 0 16px;
+}
+
+.cover-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.cover-preview {
+  display: block;
+  width: 120px;
+  height: 170px;
+  object-fit: contain;
+  border: 1px solid var(--light-border);
+  border-radius: 8px;
+  margin-bottom: 16px;
+}
+
+.file-name {
+  overflow-wrap: anywhere;
+}
+
+.cover-error {
+  color: var(--danger);
+}

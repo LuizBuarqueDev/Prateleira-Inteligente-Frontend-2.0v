@@ -15,6 +15,13 @@ export const routes: Routes = [
   },
 
   {
+    path: 'books/new',
+    loadComponent: () =>
+      import('./pages/book-register/book-register.page').then((m) => m.BookRegisterPage),
+    canActivate: [authGuard],
+  },
+
+  {
     path: 'library',
     loadComponent: () => import('./pages/my-library/my-library.page').then((m) => m.MyLibraryPage),
     canActivate: [authGuard],

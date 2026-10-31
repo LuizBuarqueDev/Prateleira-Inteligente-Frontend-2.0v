@@ -30,10 +30,22 @@
             mat-button
             routerLink="/books"
             routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
             (click)="drawer.close()"
           >
             <mat-icon>shelves</mat-icon>
             Todos os Livros
+          </a>
+
+          <a
+            class="btn"
+            mat-button
+            routerLink="/books/new"
+            routerLinkActive="active"
+            (click)="drawer.close()"
+          >
+            <mat-icon>add_circle</mat-icon>
+            Cadastrar livro
           </a>
 
           <a

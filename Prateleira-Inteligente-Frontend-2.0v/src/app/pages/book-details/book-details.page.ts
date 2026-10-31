@@ -5,12 +5,13 @@ import { BookService } from '@services/book.service';
 import { switchMap } from 'rxjs';
 import { MatIcon } from '@angular/material/icon';
 import { Location } from '@angular/common';
+import { BookCoverPipe } from '@app/shared/pipes/book-cover.pipe';
 
 @Component({
   selector: 'app-book-details',
   templateUrl: './book-details.page.html',
   styleUrl: './book-details.page.scss',
-  imports: [MatIcon],
+  imports: [MatIcon, BookCoverPipe],
 })
 export class BookDetailsPage {
   private route = inject(ActivatedRoute);

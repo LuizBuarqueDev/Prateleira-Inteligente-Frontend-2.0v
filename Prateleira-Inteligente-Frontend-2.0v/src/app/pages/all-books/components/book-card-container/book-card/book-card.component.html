@@ -2,10 +2,8 @@
   <div class="img-container">
     <img
       class="img-16-9"
-      [src]="
-        book()?.cover ||
-        'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg'
-      "
+      [src]="book()?.cover | bookCover"
+      [alt]="'Capa de ' + (book()?.title || 'livro')"
     />
   </div>
   <div class="book-info">
