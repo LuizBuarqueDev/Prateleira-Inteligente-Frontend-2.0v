@@ -8,7 +8,7 @@
   --dark-gray: #616161;
   --light-gray: #d6d6d6;
 
-  --light-2: #eeeeee;
+  --light-2: #edf2fa;
 
   --light-border: #e0e0e0;
 
@@ -18,9 +18,13 @@
   --success: #00a63e;
   --danger: #f44336;
 
+  --rating-star: #fbc02d;
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.2);
+
   --gradient-1: linear-gradient(to bottom right, #7011b4, #5c37f7);
   --gradient-2: linear-gradient(to bottom right, #5c37f7, #3f8cff);
   --gradient-3: linear-gradient(to bottom right, #4b0f8c, #7011b4);
+  --gradient-book-cover: linear-gradient(145deg, var(--light-blue), var(--light));
 
   --book-stat-icon-bg: #615fff;
   --user-stat-icon-bg: #ad46ff;

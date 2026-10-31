@@ -1,26 +1,28 @@
-<div class="book-card">
-  <div class="img-container">
-    <img
-      class="img-16-9"
-      [src]="book()?.cover | bookCover"
-      [alt]="'Capa de ' + (book()?.title || 'livro')"
-    />
-  </div>
-  <div class="book-info">
-    <h3 [routerLink]="'/book/' + book()?.id">{{ book()?.title }}</h3>
-    <p>{{ book()?.publisher }}</p>
-    <div class="rating-section">
-      <mat-icon>star_shine</mat-icon>
-      <data [value]="book()?.score">
-        {{ book()?.score }}
-      </data>
-      <p>({{ book()?.assessmentQuantity }})</p>
-    </div>
+@if (book(); as currentBook) {
+  <div class="book-card">
+    <a
+      class="cover-link"
+      [routerLink]="['/book', currentBook.id]"
+      [attr.aria-label]="'Ver detalhes de ' + currentBook.title"
+    >
+      <app-book-cover-display [book]="currentBook" variant="card" />
+    </a>
+    <div class="book-info">
+      <h3><a [routerLink]="['/book', currentBook.id]">{{ currentBook.title }}</a></h3>
+      <p>{{ currentBook.publisher }}</p>
+      <div class="rating-section">
+        <mat-icon>star_shine</mat-icon>
+        <data [value]="currentBook.score">
+          {{ currentBook.score }}
+        </data>
+        <p>({{ currentBook.assessmentQuantity }})</p>
+      </div>
 
-    <div class="categories">
-      @for (category of book()?.categoriesNames; track category) {
-        <app-category-card [category]="category" />
-      }
+      <div class="categories">
+        @for (category of currentBook.categoriesNames; track category) {
+          <app-category-card [category]="category" />
+        }
+      </div>
     </div>
   </div>
-</div>
+}

@@ -1,60 +1,71 @@
-.go-back {
+:host {
+  display: block;
+}
+
+.main-container {
+  box-sizing: border-box;
+  min-height: 100vh;
+  padding: 32px;
+  background: var(--light-2);
+}
+
+.details-shell {
   display: flex;
-  align-items: center;
-  font-size: 1.2rem;
-  margin-bottom: 20px;
-  a {
-    gap: 10px;
-    color: var(--dark-gray);
-    display: flex;
-    align-items: center;
-    transition:
-      transform 0.3s ease,
-      color 0.3s ease;
-    &:hover {
-      transform: scale(1.05);
-      color: var(--purple-1);
-    }
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+}
+
+.back-link {
+  align-self: flex-start;
+  color: var(--dark-gray);
+}
+
+.details-card {
+  background: var(--light);
+  border: 1px solid var(--light-border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.book-header {
+  display: grid;
+  grid-template-columns: minmax(220px, 300px) minmax(0, 1fr);
+  align-items: start;
+  gap: 40px;
+  padding: 32px;
+}
+
+.book-tabs mat-icon {
+  margin-right: 8px;
+}
+
+@media (max-width: 900px) {
+  .book-header {
+    grid-template-columns: minmax(180px, 240px) minmax(0, 1fr);
+    gap: 28px;
+    padding: 24px;
   }
 }
 
-.book-container {
-  display: flex;
-  gap: 30px;
-  margin-top: 20px;
-  align-items: flex-start;
-
-  .book-left {
-    background-color: var(--light);
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    border-radius: 12px;
-    border: 1px solid var(--light-border);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+@media (max-width: 700px) {
+  .main-container {
+    padding: 20px 16px;
   }
 
-  .book-image-container {
-    border-radius: 12px;
-    overflow: hidden;
+  .details-shell {
+    gap: 20px;
   }
 
-  .book-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  .book-header {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 24px 20px;
   }
 
-  .book-right {
-    background-color: var(--light);
-    border-radius: 5px var(--dark-gray);
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    border-radius: 12px;
-    border: 1px solid var(--light-border);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    padding: 20px;
+  app-book-cover-display {
+    width: min(100%, 240px);
+    justify-self: center;
   }
 }

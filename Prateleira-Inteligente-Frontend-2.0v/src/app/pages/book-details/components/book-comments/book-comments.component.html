@@ -1,0 +1,37 @@
+<section class="comments-panel" aria-labelledby="comments-heading">
+  <header class="comments-header">
+    <div>
+      <h2 id="comments-heading">Opiniões dos leitores</h2>
+      <p>Veja o que outros leitores acharam desta obra.</p>
+    </div>
+    @if (comments.hasValue() && !comments.isLoading()) {
+      <span class="comment-count">
+        {{ comments.value().length }} {{ comments.value().length === 1 ? 'comentário' : 'comentários' }}
+      </span>
+    }
+  </header>
+
+  <app-resource-state [resource]="comments" />
+
+  @if (comments.hasValue() && !comments.isLoading()) {
+    <div class="comment-list">
+      @for (comment of comments.value(); track comment.id) {
+        <article class="comment-card">
+          <header class="comment-author">
+            <div class="comment-avatar" aria-hidden="true">{{ comment.user.username.charAt(0).toUpperCase() }}</div>
+            <div>
+              <h3>{{ comment.user.username }}</h3>
+              <time [attr.datetime]="comment.createdAt">{{ comment.createdAt | date: 'dd/MM/yyyy' }}</time>
+            </div>
+          </header>
+          <p class="comment-text">{{ comment.text }}</p>
+        </article>
+      } @empty {
+        <div class="empty-state">
+          <mat-icon aria-hidden="true">forum</mat-icon>
+          <p>Ainda não há comentários sobre este livro.</p>
+        </div>
+      }
+    </div>
+  }
+</section>

@@ -1,0 +1,52 @@
+<div class="book-summary">
+  <header>
+    <h1>{{ book().title }}</h1>
+    <p class="author-names">{{ authorNames() || 'Autoria não informada' }}</p>
+  </header>
+
+  <app-book-rating [score]="book().score" [count]="book().assessmentQuantity" />
+
+  @if (book().categories.length) {
+    <div class="categories" aria-label="Categorias do livro">
+      @for (category of book().categories; track category.id) {
+        <app-category-card [category]="category.name" />
+      }
+    </div>
+  }
+
+  <section class="synopsis" aria-labelledby="synopsis-heading">
+    <h2 id="synopsis-heading">Sobre o livro</h2>
+    <p>{{ book().description || 'Este livro ainda não possui uma descrição.' }}</p>
+  </section>
+
+  <dl class="book-metadata">
+    <div class="metadata-item">
+      <span class="metadata-icon"><mat-icon aria-hidden="true">apartment</mat-icon></span>
+      <div>
+        <dt>Editora</dt>
+        <dd>{{ book().publisher || 'Não informada' }}</dd>
+      </div>
+    </div>
+    <div class="metadata-item">
+      <span class="metadata-icon"><mat-icon aria-hidden="true">calendar_month</mat-icon></span>
+      <div>
+        <dt>Publicação</dt>
+        <dd>
+          @if (book().publicationDate) {
+            <time [attr.datetime]="book().publicationDate">{{ book().publicationDate | date: 'dd/MM/yyyy' }}</time>
+          } @else {
+            Não informada
+          }
+        </dd>
+      </div>
+    </div>
+  </dl>
+
+  <div class="book-actions">
+    <a mat-flat-button class="library-button" routerLink="/library">
+      <mat-icon>collections_bookmark</mat-icon>
+      Minha biblioteca
+    </a>
+    <a mat-stroked-button routerLink="/books">Explorar outros livros</a>
+  </div>
+</div>

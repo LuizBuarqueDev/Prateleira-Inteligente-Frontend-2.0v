@@ -1,0 +1,17 @@
+<div class="book-rating">
+  <div class="stars" role="img" [attr.aria-label]="formattedScore() + ' de 5 estrelas'">
+    @for (star of stars; track star) {
+      <mat-icon [class.filled]="value() >= star - 0.5" aria-hidden="true">{{ starIcon(star) }}</mat-icon>
+    }
+  </div>
+  @if (score() !== null) {
+    <strong class="rating-value">{{ formattedScore() }}</strong>
+  }
+  <span class="rating-count">
+    @if (count(); as total) {
+      {{ total }} {{ total === 1 ? 'avaliação' : 'avaliações' }}
+    } @else {
+      Ainda sem avaliações
+    }
+  </span>
+</div>
