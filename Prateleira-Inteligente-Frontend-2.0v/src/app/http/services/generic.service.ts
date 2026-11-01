@@ -1,8 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { inject } from '@angular/core';
-import { API_CONFIG } from '../api.config';export abstract class GenericService<T> {
-  protected http = inject(HttpClient);
-  protected baseUrl = API_CONFIG.baseUrl;
+import { API_CONFIG } from '../api.config';
+
+export abstract class GenericService<T> {
+  protected readonly http = inject(HttpClient);
+  protected readonly baseUrl = API_CONFIG.baseUrl;
 
   constructor(protected readonly apiUrl: string) {}
 

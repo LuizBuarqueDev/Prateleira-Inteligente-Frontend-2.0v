@@ -1,0 +1,66 @@
+<main class="main-container">
+  <a mat-button class="back-link" routerLink="/books">
+    <mat-icon>arrow_back</mat-icon>
+    Voltar para os livros
+  </a>
+
+  <header class="page-header">
+    <h1>Cadastrar livro</h1>
+    <p>Adicione um novo livro à Prateleira Inteligente.</p>
+  </header>
+
+  <form [formGroup]="form" (ngSubmit)="save()" [attr.aria-busy]="saving()">
+    <div class="form-sections">
+      <section class="form-card" aria-labelledby="information-heading">
+        <header class="section-header">
+          <mat-icon aria-hidden="true">menu_book</mat-icon>
+          <div>
+            <h2 id="information-heading">Informações do livro</h2>
+            <p>Preencha os dados da obra. Os campos com * são obrigatórios.</p>
+          </div>
+        </header>
+        <app-book-information [form]="form.controls.information" />
+      </section>
+
+      <section class="form-card relationships-card" aria-labelledby="relationships-heading">
+        <header class="section-header">
+          <mat-icon aria-hidden="true">category</mat-icon>
+          <div>
+            <h2 id="relationships-heading">Autores e categorias</h2>
+            <p>Opcional. Vincule o livro aos autores e às categorias existentes, se desejar.</p>
+          </div>
+        </header>
+
+        <app-resource-state [resource]="relationships" />
+
+        @if (relationships.hasValue() && !relationships.isLoading()) {
+          <app-book-relationships
+            [form]="form.controls.relationships"
+            [authors]="relationships.value().authors"
+            [categories]="relationships.value().categories"
+          />
+          @if (!relationships.value().authors.length || !relationships.value().categories.length) {
+            <p class="empty-message" role="status">
+              Algumas listas estão vazias. Você pode cadastrar o livro sem autores ou categorias.
+            </p>
+          }
+        }
+      </section>
+    </div>
+
+    <footer class="form-actions">
+      <button mat-stroked-button type="button" routerLink="/books" [disabled]="saving()">
+        Cancelar
+      </button>
+      <button
+        mat-flat-button
+        class="save-button"
+        type="submit"
+        [disabled]="saving() || formStatus() === 'PENDING'"
+      >
+        <mat-icon>{{ saving() ? 'hourglass_top' : 'save' }}</mat-icon>
+        {{ saving() ? 'Cadastrando...' : 'Cadastrar livro' }}
+      </button>
+    </footer>
+  </form>
+</main>

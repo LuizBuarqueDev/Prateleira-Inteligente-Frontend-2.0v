@@ -22,11 +22,15 @@
 
       <a href="">Esqueceu sua senha?</a>
 
-      <button mat-raised-button class="btn-login" type="submit">Entrar</button>
+      <button mat-raised-button class="btn-login" type="submit" [disabled]="submitting()">
+        {{ submitting() ? 'Entrando...' : 'Entrar' }}
+      </button>
 
       <p class="switch-mode">
         Não possui conta?
-        <button mat-button type="button" (click)="isLoginMode = false">Criar conta</button>
+        <button mat-button type="button" [disabled]="submitting()" (click)="isLoginMode = false">
+          Criar conta
+        </button>
       </p>
     </form>
   </div>
@@ -52,11 +56,15 @@
           <input matInput formControlName="password" type="password" />
         </mat-form-field>
 
-        <button mat-raised-button class="btn-login" type="submit">Criar conta</button>
+        <button mat-raised-button class="btn-login" type="submit" [disabled]="submitting()">
+          {{ submitting() ? 'Criando conta...' : 'Criar conta' }}
+        </button>
 
         <p class="switch-mode">
           Já possui conta?
-          <button mat-button type="button" (click)="isLoginMode = true">Entrar</button>
+          <button mat-button type="button" [disabled]="submitting()" (click)="isLoginMode = true">
+            Entrar
+          </button>
         </p>
       </form>
     </div>

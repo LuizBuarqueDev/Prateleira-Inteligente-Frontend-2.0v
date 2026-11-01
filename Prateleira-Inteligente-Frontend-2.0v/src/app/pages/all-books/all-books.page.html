@@ -1,6 +1,14 @@
 <div class="main-container">
-  <h1>Todos os livros</h1>
-  <p>Explore nossa coleção de livros</p>
+  <header class="page-header">
+    <div>
+      <h1>Todos os livros</h1>
+      <p>Explore nossa coleção de livros</p>
+    </div>
+    <a mat-flat-button class="register-button" routerLink="/books/new">
+      <mat-icon>add</mat-icon>
+      Cadastrar livro
+    </a>
+  </header>
 
   <app-search-bar [(search)]="searchTerm" />
 

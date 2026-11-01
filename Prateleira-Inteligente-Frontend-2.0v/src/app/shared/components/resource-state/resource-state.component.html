@@ -1,0 +1,11 @@
+@if (resource().isLoading()) {
+  <p class="resource-state" role="status">Carregando...</p>
+} @else if (resource().error()) {
+  <div class="resource-state" role="alert">
+    <p>Não foi possível carregar os dados.</p>
+    <button mat-stroked-button type="button" (click)="resource().reload()">
+      <mat-icon>refresh</mat-icon>
+      Tentar novamente
+    </button>
+  </div>
+}

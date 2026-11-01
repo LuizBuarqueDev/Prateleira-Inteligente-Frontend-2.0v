@@ -1,28 +1,28 @@
 <div class="stats-cards-container">
   <app-generic-statcard
     icon="import_contacts"
-    [count]="booksCount.value()"
+    [count]="booksCount.hasValue() ? booksCount.value() : '—'"
     label="Total de Livros"
     iconBgColor="var(--book-stat-icon-bg)"
   >
   </app-generic-statcard>
   <app-generic-statcard
     icon="group"
-    [count]="usersCount.value()"
+    [count]="usersCount.hasValue() ? usersCount.value() : '—'"
     label="Total de Usuários"
     iconBgColor="var(--user-stat-icon-bg)"
   >
   </app-generic-statcard>
   <app-generic-statcard
     icon="category"
-    [count]="categoriesCount.value()"
+    [count]="categoriesCount.hasValue() ? categoriesCount.value() : '—'"
     label="Total de Categorias"
     iconBgColor="var(--category-stat-icon-bg)"
   >
   </app-generic-statcard>
   <app-generic-statcard
     icon="mode_comment"
-    [count]="commentsCount.value()"
+    [count]="commentsCount.hasValue() ? commentsCount.value() : '—'"
     label="Total de Comentários"
     iconBgColor="var(--comment-stat-icon-bg)"
   >

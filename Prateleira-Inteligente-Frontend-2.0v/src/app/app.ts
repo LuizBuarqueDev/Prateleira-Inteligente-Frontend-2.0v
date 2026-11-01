@@ -1,11 +1,10 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
 import { Sidenav } from './shared/layout/sidebar/sidenav.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, Sidenav],
+  imports: [Sidenav],
   templateUrl: './app.html',
   styleUrls: ['./app.scss']
 })

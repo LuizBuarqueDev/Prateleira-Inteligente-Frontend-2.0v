@@ -1,0 +1,19 @@
+<figure class="book-cover">
+  @if (book().cover && !imageFailed()) {
+    <img
+      [src]="book().cover | bookCover"
+      [alt]="'Capa de ' + book().title"
+      (error)="imageFailed.set(true)"
+    />
+  } @else {
+    <div
+      class="cover-placeholder"
+      role="img"
+      [attr.aria-label]="'Capa indisponível para ' + book().title"
+    >
+      <mat-icon aria-hidden="true">auto_stories</mat-icon>
+      <span>{{ book().title }}</span>
+      <small>Capa não disponível</small>
+    </div>
+  }
+</figure>

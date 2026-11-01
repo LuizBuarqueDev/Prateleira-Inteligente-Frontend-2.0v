@@ -1,12 +1,16 @@
-import { Component, inject } from '@angular/core';
+import { Component, DestroyRef, inject, signal } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { finalize } from 'rxjs';
+import { AppErrorService } from '@app/core/errors/app-error.service';
 
 import { AuthService } from '@services/auth.service';
 
@@ -25,46 +29,62 @@ import { AuthService } from '@services/auth.service';
   ],
 })
 export class AuthPage {
-  private fb = inject(FormBuilder);
-  private authService = inject(AuthService);
-  private router = inject(Router);
+  private readonly fb = inject(FormBuilder);
+  private readonly authService = inject(AuthService);
+  private readonly router = inject(Router);
+  private readonly errors = inject(AppErrorService);
+  private readonly snackBar = inject(MatSnackBar);
+  private readonly destroyRef = inject(DestroyRef);
 
   isLoginMode = true;
+  readonly submitting = signal(false);
 
-  loginForm: FormGroup = this.fb.group({
+  readonly loginForm = this.fb.nonNullable.group({
     username: [''],
     password: [''],
   });
 
-  registerForm: FormGroup = this.fb.group({
+  readonly registerForm = this.fb.nonNullable.group({
     username: [''],
     email: [''],
     password: [''],
   });
 
-  onLogin() {
-    this.authService.loginRequest(this.loginForm.value).subscribe({
-      next: (response) => {
-        this.authService.login(response.token, this.loginForm.value.username);
+  onLogin(): void {
+    if (this.submitting()) return;
 
-        this.router.navigate(['/books']);
-      },
-      error: (err) => {
-        alert(err?.error || 'Erro ao fazer login');
-      },
-    });
+    const credentials = this.loginForm.getRawValue();
+    this.submitting.set(true);
+    this.authService
+      .loginRequest(credentials)
+      .pipe(
+        this.errors.completeOnError(),
+        takeUntilDestroyed(this.destroyRef),
+        finalize(() => this.submitting.set(false)),
+      )
+      .subscribe((response) => {
+        this.authService.login(response.token, credentials.username);
+        void this.router.navigate(['/books']);
+      });
   }
 
-  onRegister() {
-    this.authService.registerRequest(this.registerForm.value).subscribe({
-      next: (response) => {
-        alert(response);
+  onRegister(): void {
+    if (this.submitting()) return;
+
+    this.submitting.set(true);
+    this.authService
+      .registerRequest(this.registerForm.getRawValue())
+      .pipe(
+        this.errors.completeOnError(),
+        takeUntilDestroyed(this.destroyRef),
+        finalize(() => this.submitting.set(false)),
+      )
+      .subscribe(() => {
+        this.snackBar.open('Conta criada com sucesso! Entre para continuar.', 'Fechar', {
+          duration: 5000,
+        });
         this.isLoginMode = true;
         this.registerForm.reset();
-      },
-      error: (err) => {
-        alert(err?.error || 'Erro ao registrar');
-      },
-    });
+      });
   }
 }

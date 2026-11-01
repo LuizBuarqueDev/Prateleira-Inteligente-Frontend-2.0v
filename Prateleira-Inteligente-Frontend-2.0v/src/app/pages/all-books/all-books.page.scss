@@ -1,7 +1,21 @@
 .main-container {
-
-  p{
+  p {
     color: var(--dark-gray);
     font-size: 1.1rem;
   }
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.register-button {
+  background: var(--gradient-2);
+  color: var(--light);
+  border-radius: 12px;
 }

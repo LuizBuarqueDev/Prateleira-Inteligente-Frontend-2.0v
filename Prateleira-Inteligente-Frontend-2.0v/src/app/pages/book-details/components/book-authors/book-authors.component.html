@@ -1,0 +1,19 @@
+<section class="authors-panel" aria-labelledby="authors-heading">
+  <h2 id="authors-heading">Quem escreveu este livro</h2>
+  <div class="author-list">
+    @for (author of authors(); track author.id) {
+      <article class="author-card">
+        <div class="author-avatar" aria-hidden="true">{{ author.name.charAt(0).toUpperCase() }}</div>
+        <div>
+          <h3>{{ author.name }}</h3>
+          <p>Autor desta obra</p>
+        </div>
+      </article>
+    } @empty {
+      <div class="empty-state">
+        <mat-icon aria-hidden="true">person_outline</mat-icon>
+        <p>Os autores deste livro ainda não foram informados.</p>
+      </div>
+    }
+  </div>
+</section>

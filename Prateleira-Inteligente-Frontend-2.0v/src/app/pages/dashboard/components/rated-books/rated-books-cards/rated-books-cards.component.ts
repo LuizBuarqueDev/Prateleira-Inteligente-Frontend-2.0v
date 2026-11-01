@@ -1,20 +1,21 @@
 import { Component, inject, Signal, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
-import { ResourceFactory } from '@app/http/services/util/resource-factory.ultil';
+import { ResourceFactory } from '@services/util/resource-factory.util';
 
 import { BookService } from '@services/book.service';
 
 import { BookSimplified } from '@models/simplified/book-simplified.model';
 import { PageResponse } from '@models/page-response.model';
 import { BookSortField } from '@models/enums/book-sort-field.enum';
+import { BookCoverPipe } from '@app/shared/pipes/book-cover.pipe';
+import { ResourceStateComponent } from '@app/shared/components/resource-state/resource-state.component';
 
 @Component({
   selector: 'app-rated-books-cards',
   templateUrl: './rated-books-cards.component.html',
   styleUrl: './rated-books-cards.component.scss',
   standalone: true,
-  imports: [CommonModule, MatIcon],
+  imports: [MatIcon, BookCoverPipe, ResourceStateComponent],
 })
 export class RatedBooksCardsComponent extends ResourceFactory {
   private readonly bookService = inject(BookService);
